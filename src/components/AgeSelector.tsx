@@ -1,10 +1,9 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
-export type AgeGroup = "6-9" | "10-12" | "13-16" | "17-18";
+export type AgeGroup = "3-5" | "6-9" | "10-12" | "13-16" | "17-18";
 
 interface AgeSelectorProps {
   selectedAge: AgeGroup | null;
@@ -12,6 +11,11 @@ interface AgeSelectorProps {
 }
 
 const ageGroups: Array<{ id: AgeGroup; label: string; description: string }> = [
+  {
+    id: "3-5",
+    label: "3-5 years",
+    description: "Early Childhood",
+  },
   {
     id: "6-9",
     label: "6-9 years",

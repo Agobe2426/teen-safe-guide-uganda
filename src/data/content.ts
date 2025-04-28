@@ -1,4 +1,3 @@
-
 import { AgeGroup } from "@/components/AgeSelector";
 import { ThemeType } from "@/components/ThemeCard";
 
@@ -66,6 +65,79 @@ export const themeData = [
 ];
 
 export const contentData: ContentItem[] = [
+  {
+    id: "early-learning",
+    title: "My Body and Me",
+    description: "Learning about our bodies in a fun and safe way",
+    content: `
+      <h2>Our Amazing Bodies</h2>
+      <p>Everyone's body is special and unique! Let's learn about our bodies together.</p>
+      
+      <h3>Parts of Our Body</h3>
+      <ul>
+        <li>Head - for thinking and seeing</li>
+        <li>Arms - for hugging and playing</li>
+        <li>Legs - for walking and running</li>
+        <li>Tummy - for food and giggles</li>
+      </ul>
+      
+      <h3>Taking Care of Our Body</h3>
+      <p>We need to keep our body clean and healthy:</p>
+      <ul>
+        <li>Washing hands with soap</li>
+        <li>Brushing teeth morning and night</li>
+        <li>Having a bath or shower</li>
+        <li>Eating healthy food</li>
+      </ul>
+      
+      <h3>Safe Touch</h3>
+      <p>Remember:</p>
+      <ul>
+        <li>Your body belongs to you</li>
+        <li>Some body parts are private</li>
+        <li>It's okay to say "no" to touches you don't like</li>
+        <li>Tell a trusted grown-up if someone makes you feel uncomfortable</li>
+      </ul>
+    `,
+    ageGroups: ["3-5"],
+    themeId: "development",
+  },
+  {
+    id: "family-care",
+    title: "Family and Care",
+    description: "Learning about families and how they care for us",
+    content: `
+      <h2>Our Loving Families</h2>
+      <p>Families come in all shapes and sizes, and they all share love and care!</p>
+      
+      <h3>Family Members</h3>
+      <ul>
+        <li>Parents who take care of us</li>
+        <li>Sisters and brothers to play with</li>
+        <li>Grandparents who tell stories</li>
+        <li>Aunts and uncles who help us grow</li>
+      </ul>
+      
+      <h3>Family Love</h3>
+      <p>Families show love by:</p>
+      <ul>
+        <li>Giving hugs and kisses</li>
+        <li>Making yummy food</li>
+        <li>Reading bedtime stories</li>
+        <li>Taking care when we're sick</li>
+      </ul>
+      
+      <h3>Being a Good Family Member</h3>
+      <ul>
+        <li>Saying "please" and "thank you"</li>
+        <li>Helping with small tasks</li>
+        <li>Sharing toys with siblings</li>
+        <li>Using kind words</li>
+      </ul>
+    `,
+    ageGroups: ["3-5"],
+    themeId: "relationships",
+  },
   {
     id: "puberty-changes",
     title: "Understanding Puberty",
