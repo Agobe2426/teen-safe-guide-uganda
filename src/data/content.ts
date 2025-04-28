@@ -66,115 +66,131 @@ export const themeData = [
 
 export const contentData: ContentItem[] = [
   {
-    id: "early-self",
-    title: "I Am Special!",
-    description: "Learning about ourselves and how special we are",
+    id: "growing-body",
+    title: "Growing and Changing",
+    description: "Learning about how our bodies grow and change",
     content: `
-      <h2>You Are Special!</h2>
-      <p>Everyone is special and unique! God made each of us special in our own way.</p>
+      <h2>How We Grow</h2>
+      <p>As we grow, our bodies change in many wonderful ways! Just like a flower grows from a tiny seed, we grow taller and stronger each day.</p>
       
-      <h3>What Makes You Special?</h3>
+      <h3>Everyone is Special</h3>
       <ul>
-        <li>Your smile</li>
-        <li>Your kindness</li>
-        <li>The way you laugh</li>
-        <li>The things you like to do</li>
+        <li>Every child is unique and precious</li>
+        <li>We all grow at our own perfect pace</li>
+        <li>Our bodies are amazing gifts from God</li>
+        <li>We should take good care of ourselves</li>
       </ul>
       
-      <h3>Boys and Girls</h3>
-      <p>Boys and girls are both special! We should:</p>
+      <h3>Taking Care of Our Bodies</h3>
       <ul>
-        <li>Respect each other</li>
-        <li>Be kind to everyone</li>
-        <li>Love ourselves</li>
-        <li>Help others</li>
+        <li>Eating healthy foods to grow strong</li>
+        <li>Getting enough sleep to grow well</li>
+        <li>Exercising and playing safely</li>
+        <li>Keeping clean and healthy</li>
       </ul>
 
-      <h3>Taking Care of Our Body</h3>
+      <h3>Being Safe and Strong</h3>
+      <p>Remember these important rules:</p>
       <ul>
-        <li>Eat healthy food to grow strong</li>
-        <li>Get plenty of sleep</li>
-        <li>Play safely with friends</li>
-        <li>Keep our body clean</li>
+        <li>Your body belongs to you</li>
+        <li>Say "NO" if you feel unsafe</li>
+        <li>Tell a trusted grown-up if you need help</li>
+        <li>Stay close to safe family members</li>
       </ul>
     `,
     ageGroups: ["3-5"],
     themeId: "development",
   },
   {
-    id: "early-family",
-    title: "My Family and Friends",
-    description: "Learning about our family and making good friends",
+    id: "family-friends",
+    title: "Family and Friends",
+    description: "Understanding family relationships and making good friends",
     content: `
-      <h2>Our Wonderful Families</h2>
-      <p>Families come in all sizes! Some families are big, some are small, but all families are special.</p>
+      <h2>Our Special Families</h2>
+      <p>Families are like beautiful gardens with different types of flowers - each one special in its own way!</p>
       
-      <h3>Family Members</h3>
+      <h3>Types of Families</h3>
       <ul>
-        <li>Parents who take care of us</li>
-        <li>Brothers and sisters to play with</li>
-        <li>Grandparents who tell stories</li>
-        <li>Aunts and uncles who help us</li>
+        <li>Some families are big, some are small</li>
+        <li>Some live with mummy and daddy</li>
+        <li>Some live with grandparents</li>
+        <li>Some live with aunties or uncles</li>
+        <li>All families are special!</li>
+      </ul>
+
+      <h3>Being a Good Family Member</h3>
+      <ul>
+        <li>Showing love and respect</li>
+        <li>Helping with small tasks</li>
+        <li>Using kind words</li>
+        <li>Following family rules</li>
       </ul>
 
       <h3>Making Good Friends</h3>
       <p>Good friends:</p>
       <ul>
-        <li>Share their toys</li>
-        <li>Say kind words</li>
+        <li>Are kind and gentle</li>
+        <li>Share and take turns</li>
         <li>Help each other</li>
-        <li>Play nicely</li>
+        <li>Play safely together</li>
       </ul>
 
-      <h3>Staying Safe with Friends</h3>
+      <h3>Staying Safe with Others</h3>
       <ul>
-        <li>Play where adults can see you</li>
-        <li>Tell a grown-up if someone is mean</li>
-        <li>Stay with safe friends</li>
-        <li>Listen to your parents about who to play with</li>
+        <li>Play where grown-ups can see you</li>
+        <li>Stay with trusted friends</li>
+        <li>Tell a grown-up if someone is unkind</li>
+        <li>Trust your feelings</li>
       </ul>
     `,
     ageGroups: ["3-5"],
     themeId: "relationships",
   },
   {
-    id: "early-safety",
-    title: "Keeping Safe",
-    description: "Learning about our body and staying safe",
+    id: "staying-safe",
+    title: "Staying Safe and Happy",
+    description: "Learning ways to stay safe and protected",
     content: `
-      <h2>Our Body is Special</h2>
-      <p>Our body belongs to us! We need to keep it safe.</p>
+      <h2>Keeping Safe and Happy</h2>
+      <p>God made us special, and we need to stay safe and happy!</p>
       
-      <h3>Private Parts</h3>
-      <p>Some parts of our body are private:</p>
-      <ul>
-        <li>Parts covered by our underwear are private</li>
-        <li>No one should touch our private parts</li>
-        <li>We don't touch other people's private parts</li>
-        <li>Tell a trusted adult if someone tries to touch private parts</li>
-      </ul>
-
-      <h3>Safe and Unsafe Touch</h3>
-      <p>Remember:</p>
+      <h3>Safe and Unsafe Touches</h3>
       <ul>
         <li>Safe touches make us feel happy (like hugs from family)</li>
         <li>Unsafe touches make us feel scared or sad</li>
-        <li>It's okay to say "NO" to touches we don't like</li>
-        <li>Tell a trusted grown-up if someone makes you feel unsafe</li>
+        <li>We can say "NO" to touches we don't like</li>
+        <li>Tell a trusted grown-up if you feel unsafe</li>
+      </ul>
+
+      <h3>Safe Adults</h3>
+      <p>These people help keep us safe:</p>
+      <ul>
+        <li>Parents and family members</li>
+        <li>Teachers at school</li>
+        <li>Religious leaders</li>
+        <li>Doctors and nurses</li>
+      </ul>
+
+      <h3>Safety Rules</h3>
+      <ul>
+        <li>Stay with trusted grown-ups</li>
+        <li>Don't go with strangers</li>
+        <li>Tell someone if you feel scared</li>
+        <li>Know your home address</li>
       </ul>
     `,
     ageGroups: ["3-5"],
-    themeId: "health",
+    themeId: "values",
   },
   {
-    id: "early-health",
-    title: "Staying Healthy",
-    description: "Learning about keeping our body healthy",
+    id: "healthy-habits",
+    title: "Healthy Happy Living",
+    description: "Learning good health habits for a happy life",
     content: `
-      <h2>Being Healthy and Strong</h2>
-      <p>We need to take care of our body to stay healthy!</p>
+      <h2>Staying Healthy and Strong</h2>
+      <p>When we take care of our bodies, we stay happy and strong!</p>
       
-      <h3>Keeping Clean</h3>
+      <h3>Clean and Healthy</h3>
       <ul>
         <li>Wash hands with soap</li>
         <li>Brush teeth morning and night</li>
@@ -182,21 +198,28 @@ export const contentData: ContentItem[] = [
         <li>Wear clean clothes</li>
       </ul>
 
-      <h3>Eating Good Food</h3>
+      <h3>Healthy Food Choices</h3>
       <ul>
-        <li>Fruits to stay strong</li>
-        <li>Vegetables to grow tall</li>
-        <li>Milk for strong bones</li>
-        <li>Clean water every day</li>
+        <li>Eat lots of colorful fruits</li>
+        <li>Enjoy fresh vegetables</li>
+        <li>Drink clean water</li>
+        <li>Have regular meals</li>
+      </ul>
+
+      <h3>Exercise and Rest</h3>
+      <ul>
+        <li>Play and move every day</li>
+        <li>Get enough sleep</li>
+        <li>Take rest when tired</li>
+        <li>Enjoy outdoor games safely</li>
       </ul>
 
       <h3>When We Feel Sick</h3>
-      <p>If you don't feel well:</p>
       <ul>
-        <li>Tell Mummy, Daddy, or your caregiver</li>
-        <li>Take medicine from trusted adults only</li>
-        <li>Rest in bed if you need to</li>
-        <li>The doctor can help make you feel better</li>
+        <li>Tell a grown-up if you don't feel well</li>
+        <li>Take medicine only from trusted adults</li>
+        <li>Rest in bed if needed</li>
+        <li>Visit the health center when sick</li>
       </ul>
     `,
     ageGroups: ["3-5"],
