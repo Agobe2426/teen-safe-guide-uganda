@@ -66,77 +66,141 @@ export const themeData = [
 
 export const contentData: ContentItem[] = [
   {
-    id: "early-learning",
-    title: "My Body and Me",
-    description: "Learning about our bodies in a fun and safe way",
+    id: "early-self",
+    title: "I Am Special!",
+    description: "Learning about ourselves and how special we are",
     content: `
-      <h2>Our Amazing Bodies</h2>
-      <p>Everyone's body is special and unique! Let's learn about our bodies together.</p>
+      <h2>You Are Special!</h2>
+      <p>Everyone is special and unique! God made each of us special in our own way.</p>
       
-      <h3>Parts of Our Body</h3>
+      <h3>What Makes You Special?</h3>
       <ul>
-        <li>Head - for thinking and seeing</li>
-        <li>Arms - for hugging and playing</li>
-        <li>Legs - for walking and running</li>
-        <li>Tummy - for food and giggles</li>
+        <li>Your smile</li>
+        <li>Your kindness</li>
+        <li>The way you laugh</li>
+        <li>The things you like to do</li>
       </ul>
       
+      <h3>Boys and Girls</h3>
+      <p>Boys and girls are both special! We should:</p>
+      <ul>
+        <li>Respect each other</li>
+        <li>Be kind to everyone</li>
+        <li>Love ourselves</li>
+        <li>Help others</li>
+      </ul>
+
       <h3>Taking Care of Our Body</h3>
-      <p>We need to keep our body clean and healthy:</p>
       <ul>
-        <li>Washing hands with soap</li>
-        <li>Brushing teeth morning and night</li>
-        <li>Having a bath or shower</li>
-        <li>Eating healthy food</li>
-      </ul>
-      
-      <h3>Safe Touch</h3>
-      <p>Remember:</p>
-      <ul>
-        <li>Your body belongs to you</li>
-        <li>Some body parts are private</li>
-        <li>It's okay to say "no" to touches you don't like</li>
-        <li>Tell a trusted grown-up if someone makes you feel uncomfortable</li>
+        <li>Eat healthy food to grow strong</li>
+        <li>Get plenty of sleep</li>
+        <li>Play safely with friends</li>
+        <li>Keep our body clean</li>
       </ul>
     `,
     ageGroups: ["3-5"],
     themeId: "development",
   },
   {
-    id: "family-care",
-    title: "Family and Care",
-    description: "Learning about families and how they care for us",
+    id: "early-family",
+    title: "My Family and Friends",
+    description: "Learning about our family and making good friends",
     content: `
-      <h2>Our Loving Families</h2>
-      <p>Families come in all shapes and sizes, and they all share love and care!</p>
+      <h2>Our Wonderful Families</h2>
+      <p>Families come in all sizes! Some families are big, some are small, but all families are special.</p>
       
       <h3>Family Members</h3>
       <ul>
         <li>Parents who take care of us</li>
-        <li>Sisters and brothers to play with</li>
+        <li>Brothers and sisters to play with</li>
         <li>Grandparents who tell stories</li>
-        <li>Aunts and uncles who help us grow</li>
+        <li>Aunts and uncles who help us</li>
       </ul>
-      
-      <h3>Family Love</h3>
-      <p>Families show love by:</p>
+
+      <h3>Making Good Friends</h3>
+      <p>Good friends:</p>
       <ul>
-        <li>Giving hugs and kisses</li>
-        <li>Making yummy food</li>
-        <li>Reading bedtime stories</li>
-        <li>Taking care when we're sick</li>
+        <li>Share their toys</li>
+        <li>Say kind words</li>
+        <li>Help each other</li>
+        <li>Play nicely</li>
       </ul>
-      
-      <h3>Being a Good Family Member</h3>
+
+      <h3>Staying Safe with Friends</h3>
       <ul>
-        <li>Saying "please" and "thank you"</li>
-        <li>Helping with small tasks</li>
-        <li>Sharing toys with siblings</li>
-        <li>Using kind words</li>
+        <li>Play where adults can see you</li>
+        <li>Tell a grown-up if someone is mean</li>
+        <li>Stay with safe friends</li>
+        <li>Listen to your parents about who to play with</li>
       </ul>
     `,
     ageGroups: ["3-5"],
     themeId: "relationships",
+  },
+  {
+    id: "early-safety",
+    title: "Keeping Safe",
+    description: "Learning about our body and staying safe",
+    content: `
+      <h2>Our Body is Special</h2>
+      <p>Our body belongs to us! We need to keep it safe.</p>
+      
+      <h3>Private Parts</h3>
+      <p>Some parts of our body are private:</p>
+      <ul>
+        <li>Parts covered by our underwear are private</li>
+        <li>No one should touch our private parts</li>
+        <li>We don't touch other people's private parts</li>
+        <li>Tell a trusted adult if someone tries to touch private parts</li>
+      </ul>
+
+      <h3>Safe and Unsafe Touch</h3>
+      <p>Remember:</p>
+      <ul>
+        <li>Safe touches make us feel happy (like hugs from family)</li>
+        <li>Unsafe touches make us feel scared or sad</li>
+        <li>It's okay to say "NO" to touches we don't like</li>
+        <li>Tell a trusted grown-up if someone makes you feel unsafe</li>
+      </ul>
+    `,
+    ageGroups: ["3-5"],
+    themeId: "health",
+  },
+  {
+    id: "early-health",
+    title: "Staying Healthy",
+    description: "Learning about keeping our body healthy",
+    content: `
+      <h2>Being Healthy and Strong</h2>
+      <p>We need to take care of our body to stay healthy!</p>
+      
+      <h3>Keeping Clean</h3>
+      <ul>
+        <li>Wash hands with soap</li>
+        <li>Brush teeth morning and night</li>
+        <li>Take baths to stay clean</li>
+        <li>Wear clean clothes</li>
+      </ul>
+
+      <h3>Eating Good Food</h3>
+      <ul>
+        <li>Fruits to stay strong</li>
+        <li>Vegetables to grow tall</li>
+        <li>Milk for strong bones</li>
+        <li>Clean water every day</li>
+      </ul>
+
+      <h3>When We Feel Sick</h3>
+      <p>If you don't feel well:</p>
+      <ul>
+        <li>Tell Mummy, Daddy, or your caregiver</li>
+        <li>Take medicine from trusted adults only</li>
+        <li>Rest in bed if you need to</li>
+        <li>The doctor can help make you feel better</li>
+      </ul>
+    `,
+    ageGroups: ["3-5"],
+    themeId: "health",
   },
   {
     id: "puberty-changes",
