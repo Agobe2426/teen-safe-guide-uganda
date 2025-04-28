@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, Home, BookOpen, HelpCircle, Settings, Shield } from "lucide-react";
+import { Menu, X, Home, BookOpen, HelpCircle, Settings, Shield, User, Download, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -54,7 +54,7 @@ const Header = () => {
             </li>
             <li>
               <Link
-                to="/themes"
+                to="/learn"
                 className="flex items-center gap-2 text-gray-700 hover:text-shield-purple"
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -74,12 +74,22 @@ const Header = () => {
             </li>
             <li>
               <Link
-                to="/parent"
+                to="/profile"
                 className="flex items-center gap-2 text-gray-700 hover:text-shield-purple"
                 onClick={() => setIsMenuOpen(false)}
               >
-                <Settings size={18} />
-                <span>Parent Area</span>
+                <User size={18} />
+                <span>Profile</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/offline"
+                className="flex items-center gap-2 text-gray-700 hover:text-shield-purple"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Download size={18} />
+                <span>Offline</span>
               </Link>
             </li>
           </ul>

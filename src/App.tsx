@@ -10,6 +10,9 @@ import Quiz from "./pages/Quiz";
 import QandA from "./pages/QandA";
 import ParentArea from "./pages/ParentArea";
 import NotFound from "./pages/NotFound";
+import Learn from "./pages/Learn";
+import Profile from "./pages/Profile";
+import Offline from "./pages/Offline";
 
 const queryClient = new QueryClient();
 
@@ -21,11 +24,13 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/learn" element={<Learn />} />
           <Route path="/theme/:themeId" element={<ThemeDetail />} />
           <Route path="/quiz/:quizId" element={<Quiz />} />
           <Route path="/qanda" element={<QandA />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/offline" element={<Offline />} />
           <Route path="/parent" element={<ParentArea />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
