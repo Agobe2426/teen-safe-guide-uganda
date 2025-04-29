@@ -17,35 +17,30 @@ const ageAppropriateHeadings: Record<AgeGroup, Record<string, string>> = {
     relationships: "Family and Friends",
     values: "Respect and Safety",
     health: "Staying Clean and Healthy",
-    culture: "Cultural Values",
   },
   "6-9": {
     development: "Understanding My Body",
     relationships: "Making Friends and Trusting Others",
     values: "Personal Safety and Respect",
     health: "Keeping Healthy",
-    culture: "Cultural Values",
   },
   "10-12": {
     development: "Body Changes and Growing Up",
     relationships: "Building Friendships",
     values: "Safe and Respectful Behavior",
     health: "Healthy Habits",
-    culture: "Cultural Values",
   },
   "13-16": {
     development: "Puberty and Development",
     relationships: "Healthy Relationships",
     values: "Body Boundaries and Decision-Making",
     health: "Sexual and Reproductive Health",
-    culture: "Cultural Values",
   },
   "17-18": {
     development: "Human Growth and Maturity",
     relationships: "Relationships and Responsible Choices",
     values: "Consent, Safety, and Responsible Behavior",
     health: "Comprehensive Health and Well-being",
-    culture: "Cultural Values",
   },
 };
 
@@ -54,7 +49,9 @@ const ThemeDetail = () => {
   const [searchParams] = useSearchParams();
   const ageGroup = searchParams.get("age") as AgeGroup;
   
-  const [theme, setTheme] = useState(themeData.find(t => t.id === themeId));
+  // Filter out culture theme from themeData
+  const filteredThemeData = themeData.filter(t => t.id !== 'culture');
+  const [theme, setTheme] = useState(filteredThemeData.find(t => t.id === themeId));
   const [content, setContent] = useState<ContentItem[]>([]);
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
   

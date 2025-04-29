@@ -1,9 +1,9 @@
 
 import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
-import { Heart, Brain, Users, Star, Globe } from "lucide-react";
+import { Heart, Brain, Users, Star } from "lucide-react";
 
-export type ThemeType = "development" | "health" | "relationships" | "values" | "culture";
+export type ThemeType = "development" | "health" | "relationships" | "values";
 
 interface ThemeCardProps {
   theme: {
@@ -24,8 +24,6 @@ const getThemeIcon = (themeId: ThemeType) => {
       return <Users className="h-6 w-6 text-shield-blue" />;
     case "values":
       return <Star className="h-6 w-6 text-amber-500" />;
-    case "culture":
-      return <Globe className="h-6 w-6 text-emerald-500" />;
   }
 };
 
@@ -39,8 +37,6 @@ const getThemeColor = (themeId: ThemeType) => {
       return "bg-shield-soft-blue";
     case "values":
       return "bg-amber-50";
-    case "culture":
-      return "bg-emerald-50";
   }
 };
 

@@ -23,6 +23,9 @@ const Index = () => {
     }
   };
 
+  // Filter out culture theme
+  const filteredThemeData = themeData.filter(theme => theme.id !== 'culture');
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Header />
@@ -59,14 +62,6 @@ const Index = () => {
                 )}
               </CardContent>
             </Card>
-            
-            <div className="text-center text-sm text-muted-foreground">
-              <p>
-                Content approved by Uganda's Ministry of Education and Sports
-                <br />
-                Based on the Uganda National Education Framework (2018)
-              </p>
-            </div>
           </div>
         ) : (
           <div className="teen-shield-container">
@@ -79,7 +74,7 @@ const Index = () => {
             
             <div className="space-y-5 mb-8">
               <h3 className="text-lg font-medium">Learning Themes</h3>
-              {themeData.map((theme) => (
+              {filteredThemeData.map((theme) => (
                 <ThemeCard key={theme.id} theme={theme} ageGroup={selectedAge} />
               ))}
             </div>
@@ -113,7 +108,7 @@ const Index = () => {
             <div className="bg-muted p-4 rounded-lg text-center text-sm">
               <p className="text-muted-foreground">
                 Content is aligned with educational standards and 
-                designed to promote healthy development and cultural values.
+                designed to promote healthy development.
               </p>
             </div>
           </div>
