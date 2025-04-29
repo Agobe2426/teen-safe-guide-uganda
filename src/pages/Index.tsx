@@ -64,7 +64,7 @@ const Index = () => {
               <p>
                 Content approved by Uganda's Ministry of Education and Sports
                 <br />
-                Based on the Uganda National Sexuality Education Framework (2018)
+                Based on the Uganda National Education Framework (2018)
               </p>
             </div>
           </div>
@@ -112,7 +112,7 @@ const Index = () => {
             
             <div className="bg-muted p-4 rounded-lg text-center text-sm">
               <p className="text-muted-foreground">
-                Content is aligned with the Uganda National Sexuality Education Framework and 
+                Content is aligned with educational standards and 
                 designed to promote healthy development and cultural values.
               </p>
             </div>

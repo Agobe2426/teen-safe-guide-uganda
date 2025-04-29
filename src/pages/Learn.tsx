@@ -7,6 +7,45 @@ import ThemeCard from "@/components/ThemeCard";
 import { useSearchParams } from "react-router-dom";
 import { AgeGroup } from "@/components/AgeSelector";
 
+// Map of age-appropriate headings for each theme and age group
+const ageAppropriateHeadings: Record<AgeGroup, Record<string, string>> = {
+  "3-5": {
+    development: "Growing and Changing",
+    relationships: "Family and Friends",
+    values: "Respect and Safety",
+    health: "Staying Clean and Healthy",
+    culture: "Cultural Values",
+  },
+  "6-9": {
+    development: "Understanding My Body",
+    relationships: "Making Friends and Trusting Others",
+    values: "Personal Safety and Respect",
+    health: "Keeping Healthy",
+    culture: "Cultural Values",
+  },
+  "10-12": {
+    development: "Body Changes and Growing Up",
+    relationships: "Building Friendships",
+    values: "Safe and Respectful Behavior",
+    health: "Healthy Habits",
+    culture: "Cultural Values",
+  },
+  "13-16": {
+    development: "Puberty and Development",
+    relationships: "Healthy Relationships",
+    values: "Body Boundaries and Decision-Making",
+    health: "Sexual and Reproductive Health",
+    culture: "Cultural Values",
+  },
+  "17-18": {
+    development: "Human Growth and Maturity",
+    relationships: "Relationships and Responsible Choices",
+    values: "Consent, Safety, and Responsible Behavior",
+    health: "Comprehensive Health and Well-being",
+    culture: "Cultural Values",
+  },
+};
+
 const Learn = () => {
   const [searchParams] = useSearchParams();
   const ageGroup = searchParams.get("age") as AgeGroup;
@@ -32,7 +71,16 @@ const Learn = () => {
           
           <div className="space-y-4">
             {themeData.map((theme) => (
-              <ThemeCard key={theme.id} theme={theme} ageGroup={ageGroup || ""} />
+              <ThemeCard 
+                key={theme.id} 
+                theme={{
+                  ...theme,
+                  title: ageGroup && ageAppropriateHeadings[ageGroup]?.[theme.id] 
+                    ? ageAppropriateHeadings[ageGroup][theme.id] 
+                    : theme.title
+                }} 
+                ageGroup={ageGroup || ""}
+              />
             ))}
           </div>
         </div>

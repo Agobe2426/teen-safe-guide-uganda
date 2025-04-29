@@ -10,6 +10,45 @@ import { ThemeType } from "@/components/ThemeCard";
 import { contentData, themeData, quizData, ContentItem, Quiz } from "@/data/content";
 import { AgeGroup } from "@/components/AgeSelector";
 
+// Map of age-appropriate headings for each theme and age group
+const ageAppropriateHeadings: Record<AgeGroup, Record<string, string>> = {
+  "3-5": {
+    development: "Growing and Changing",
+    relationships: "Family and Friends",
+    values: "Respect and Safety",
+    health: "Staying Clean and Healthy",
+    culture: "Cultural Values",
+  },
+  "6-9": {
+    development: "Understanding My Body",
+    relationships: "Making Friends and Trusting Others",
+    values: "Personal Safety and Respect",
+    health: "Keeping Healthy",
+    culture: "Cultural Values",
+  },
+  "10-12": {
+    development: "Body Changes and Growing Up",
+    relationships: "Building Friendships",
+    values: "Safe and Respectful Behavior",
+    health: "Healthy Habits",
+    culture: "Cultural Values",
+  },
+  "13-16": {
+    development: "Puberty and Development",
+    relationships: "Healthy Relationships",
+    values: "Body Boundaries and Decision-Making",
+    health: "Sexual and Reproductive Health",
+    culture: "Cultural Values",
+  },
+  "17-18": {
+    development: "Human Growth and Maturity",
+    relationships: "Relationships and Responsible Choices",
+    values: "Consent, Safety, and Responsible Behavior",
+    health: "Comprehensive Health and Well-being",
+    culture: "Cultural Values",
+  },
+};
+
 const ThemeDetail = () => {
   const { themeId } = useParams<{ themeId: string }>();
   const [searchParams] = useSearchParams();
@@ -34,6 +73,14 @@ const ThemeDetail = () => {
       setQuizzes(filteredQuizzes);
     }
   }, [themeId, ageGroup]);
+
+  // Get the age-appropriate heading for the current theme
+  const getThemeTitle = () => {
+    if (themeId && ageGroup && ageAppropriateHeadings[ageGroup]?.[themeId as string]) {
+      return ageAppropriateHeadings[ageGroup][themeId as string];
+    }
+    return theme?.title || '';
+  };
 
   if (!theme) {
     return (
@@ -61,7 +108,7 @@ const ThemeDetail = () => {
               Back to Home
             </Link>
             
-            <h1 className="text-2xl font-bold">{theme.title}</h1>
+            <h1 className="text-2xl font-bold">{getThemeTitle()}</h1>
             <p className="text-muted-foreground">Age group: {ageGroup} years</p>
           </div>
           
