@@ -1,3 +1,4 @@
+
 import { AgeGroup } from "@/components/AgeSelector";
 import { ThemeType } from "@/components/ThemeCard";
 
@@ -811,3 +812,29 @@ export const quizData: Quiz[] = [
     ageGroups: ["13-16", "17-18"],
     questions: [
       {
+        id: "repro-q1",
+        question: "What is the most effective way to prevent pregnancy?",
+        options: [
+          "Taking a bath after sexual activity",
+          "Abstinence (not having sexual intercourse)",
+          "Drinking lemon juice after sexual activity",
+          "Taking pain medication before sexual activity"
+        ],
+        correctAnswer: 1,
+        explanation: "Abstinence, or not having sexual intercourse, is the most effective way to prevent pregnancy as it is 100% effective."
+      },
+      {
+        id: "repro-q2",
+        question: "Which statement about menstruation is true?",
+        options: [
+          "It only happens to girls who are sexually active",
+          "It is a sign that a girl's body is developing naturally",
+          "It means there is something wrong with the body",
+          "It only happens once a year"
+        ],
+        correctAnswer: 1,
+        explanation: "Menstruation is a natural part of female development and indicates that the reproductive system is working normally."
+      }
+    ]
+  }
+];
