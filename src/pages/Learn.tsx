@@ -46,7 +46,7 @@ const Learn = () => {
   const ageGroup = searchParams.get("age") as AgeGroup;
 
   // Filter out culture theme
-  const filteredThemeData = themeData.filter(theme => theme.id !== 'culture');
+  const filteredThemeData = themeData.filter(theme => theme.id !== "culture");
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">

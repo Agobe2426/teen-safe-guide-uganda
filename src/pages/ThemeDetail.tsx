@@ -9,6 +9,7 @@ import QuizCard from "@/components/QuizCard";
 import { ThemeType } from "@/components/ThemeCard";
 import { contentData, themeData, quizData, ContentItem, Quiz } from "@/data/content";
 import { AgeGroup } from "@/components/AgeSelector";
+import VoiceReader from "@/components/VoiceReader";
 
 // Map of age-appropriate headings for each theme and age group
 const ageAppropriateHeadings: Record<AgeGroup, Record<string, string>> = {
@@ -50,7 +51,7 @@ const ThemeDetail = () => {
   const ageGroup = searchParams.get("age") as AgeGroup;
   
   // Filter out culture theme from themeData
-  const filteredThemeData = themeData.filter(t => t.id !== 'culture');
+  const filteredThemeData = themeData.filter(t => t.id !== "culture");
   const [theme, setTheme] = useState(filteredThemeData.find(t => t.id === themeId));
   const [content, setContent] = useState<ContentItem[]>([]);
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
@@ -79,6 +80,16 @@ const ThemeDetail = () => {
     return theme?.title || '';
   };
 
+  // Extract plain text content for AI voice reading
+  const getPlainTextContent = () => {
+    if (content.length === 0) return "";
+    
+    // Simple HTML-to-text conversion for the first content item
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = content[0].content;
+    return `${content[0].title}. ${content[0].description}. ${tempDiv.textContent || ''}`;
+  };
+
   if (!theme) {
     return (
       <div className="min-h-screen flex flex-col bg-gray-50">
@@ -100,9 +111,9 @@ const ThemeDetail = () => {
       <main className="flex-grow">
         <div className="teen-shield-container">
           <div className="mb-4">
-            <Link to="/" className="inline-flex items-center text-muted-foreground hover:text-foreground mb-4">
+            <Link to="/learn" className="inline-flex items-center text-muted-foreground hover:text-foreground mb-4">
               <ArrowLeft className="h-4 w-4 mr-1" />
-              Back to Home
+              Back to Learning Areas
             </Link>
             
             <h1 className="text-2xl font-bold">{getThemeTitle()}</h1>
@@ -112,8 +123,8 @@ const ThemeDetail = () => {
           {content.length === 0 ? (
             <div className="text-center py-8">
               <p>No content available for this theme and age group yet.</p>
-              <Link to="/">
-                <Button className="mt-4">Return to Home</Button>
+              <Link to="/learn">
+                <Button className="mt-4">Return to Learning Areas</Button>
               </Link>
             </div>
           ) : (
@@ -128,6 +139,12 @@ const ThemeDetail = () => {
                   </div>
                 </Card>
               ))}
+              
+              {/* AI Voice Reader Component */}
+              <VoiceReader 
+                text={getPlainTextContent()} 
+                ageGroup={ageGroup}
+              />
               
               {quizzes.length > 0 && (
                 <div className="space-y-4 mt-8">

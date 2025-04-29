@@ -57,11 +57,6 @@ export const themeData = [
     title: "Values, Attitudes & Skills",
     description: "Develop life skills, critical thinking, and personal values.",
   },
-  {
-    id: "culture" as ThemeType,
-    title: "Society & Culture",
-    description: "Explore cultural beliefs, gender roles, and community values.",
-  },
 ];
 
 export const contentData: ContentItem[] = [
@@ -73,32 +68,246 @@ export const contentData: ContentItem[] = [
       <h2>How We Grow</h2>
       <p>As we grow, our bodies change in many wonderful ways! Just like a flower grows from a tiny seed, we grow taller and stronger each day.</p>
       
-      <h3>Everyone is Special</h3>
-      <ul>
+      <div class="bg-purple-50 p-4 rounded-lg my-4 border border-purple-100">
+        <h3 class="font-bold text-purple-700">Fun Fact! 🌟</h3>
+        <p>Did you know that you were once smaller than a strawberry? Now look at you! You've grown so much!</p>
+      </div>
+      
+      <h3 class="text-shield-purple mt-4">Everyone is Special</h3>
+      <ul class="list-disc pl-5 space-y-2">
         <li>Every child is unique and precious</li>
         <li>We all grow at our own perfect pace</li>
-        <li>Our bodies are amazing gifts from God</li>
+        <li>Our bodies are amazing gifts that help us play, learn, and love</li>
         <li>We should take good care of ourselves</li>
       </ul>
       
-      <h3>Taking Care of Our Bodies</h3>
-      <ul>
-        <li>Eating healthy foods to grow strong</li>
-        <li>Getting enough sleep to grow well</li>
-        <li>Exercising and playing safely</li>
-        <li>Keeping clean and healthy</li>
-      </ul>
+      <div class="flex items-center gap-2 bg-yellow-50 p-3 rounded-lg my-4 border border-yellow-100">
+        <div class="text-xl">🎮</div>
+        <p><strong>Activity:</strong> Stand back-to-back with a friend or family member. Who is taller? Ask a grown-up to mark your height on a wall, and check again in 3 months!</p>
+      </div>
+      
+      <h3 class="text-shield-purple mt-4">Taking Care of Our Bodies</h3>
+      <div class="grid grid-cols-2 gap-2 my-2">
+        <div class="bg-blue-50 p-2 rounded text-center">😋 Eating healthy foods</div>
+        <div class="bg-blue-50 p-2 rounded text-center">😴 Getting enough sleep</div>
+        <div class="bg-blue-50 p-2 rounded text-center">🏃‍♂️ Playing and moving</div>
+        <div class="bg-blue-50 p-2 rounded text-center">🚿 Keeping clean</div>
+      </div>
 
-      <h3>Being Safe and Strong</h3>
+      <h3 class="text-shield-purple mt-4">Being Safe and Strong</h3>
       <p>Remember these important rules:</p>
-      <ul>
-        <li>Your body belongs to you</li>
-        <li>Say "NO" if you feel unsafe</li>
-        <li>Tell a trusted grown-up if you need help</li>
-        <li>Stay close to safe family members</li>
-      </ul>
+      <div class="my-4 space-y-2">
+        <div class="flex items-center gap-2 bg-green-50 p-3 rounded-lg border border-green-100">
+          <div class="font-bold text-green-700">1.</div>
+          <p>Your body belongs to you</p>
+        </div>
+        <div class="flex items-center gap-2 bg-green-50 p-3 rounded-lg border border-green-100">
+          <div class="font-bold text-green-700">2.</div>
+          <p>Say "NO" if you feel unsafe</p>
+        </div>
+        <div class="flex items-center gap-2 bg-green-50 p-3 rounded-lg border border-green-100">
+          <div class="font-bold text-green-700">3.</div>
+          <p>Tell a trusted grown-up if you need help</p>
+        </div>
+        <div class="flex items-center gap-2 bg-green-50 p-3 rounded-lg border border-green-100">
+          <div class="font-bold text-green-700">4.</div>
+          <p>Stay close to safe family members</p>
+        </div>
+      </div>
+      
+      <div class="bg-pink-50 p-4 rounded-lg my-4 border border-pink-100">
+        <h4 class="font-bold">Remember! 💫</h4>
+        <p>Growing up is an amazing journey! You're doing great!</p>
+      </div>
     `,
     ageGroups: ["3-5"],
+    themeId: "development",
+  },
+  {
+    id: "puberty-changes",
+    title: "Understanding Puberty",
+    description: "Physical and emotional changes during puberty",
+    content: `
+      <h2>What Is Puberty?</h2>
+      <p>Puberty is the time when your body begins to develop and change as you move from childhood to adulthood. Everyone goes through puberty, though it happens at different times for different people.</p>
+      
+      <div class="bg-blue-50 p-4 rounded-lg my-4 border border-blue-100 flex items-start gap-3">
+        <div class="text-2xl">💡</div>
+        <div>
+          <h3 class="font-bold text-blue-700">Did You Know?</h3>
+          <p>Puberty usually starts between ages 8-13 for girls and 9-14 for boys. But it's perfectly normal to start earlier or later!</p>
+        </div>
+      </div>
+      
+      <div class="my-5">
+        <h3 class="text-shield-purple font-bold">Physical Changes Timeline</h3>
+        <div class="relative">
+          <div class="absolute left-2 top-0 bottom-0 w-1 bg-shield-purple-light"></div>
+          <div class="ml-8 space-y-4 py-3">
+            <div class="relative">
+              <div class="absolute -left-6 w-4 h-4 rounded-full bg-shield-purple"></div>
+              <h4 class="font-bold">Early Changes</h4>
+              <p>Growth spurts begin and you might grow taller quickly</p>
+            </div>
+            <div class="relative">
+              <div class="absolute -left-6 w-4 h-4 rounded-full bg-shield-purple"></div>
+              <h4 class="font-bold">Middle Changes</h4>
+              <p>Body hair starts growing and skin may become oilier</p>
+            </div>
+            <div class="relative">
+              <div class="absolute -left-6 w-4 h-4 rounded-full bg-shield-purple"></div>
+              <h4 class="font-bold">Later Changes</h4>
+              <p>Voice changes (especially for boys) and body shape changes</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <h3 class="text-shield-purple mt-4">Emotional Changes</h3>
+      <p>During puberty, you might experience new and stronger emotions. This is normal! You might sometimes feel:</p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-2 my-3">
+        <div class="bg-yellow-50 p-3 rounded text-center border border-yellow-100">
+          <div class="text-xl">😊→😢</div>
+          <p class="text-sm">More sensitive</p>
+        </div>
+        <div class="bg-yellow-50 p-3 rounded text-center border border-yellow-100">
+          <div class="text-xl">🤔</div>
+          <p class="text-sm">Concerned about appearance</p>
+        </div>
+        <div class="bg-yellow-50 p-3 rounded text-center border border-yellow-100">
+          <div class="text-xl">👫</div>
+          <p class="text-sm">Interested in new friendships</p>
+        </div>
+        <div class="bg-yellow-50 p-3 rounded text-center border border-yellow-100">
+          <div class="text-xl">🦅</div>
+          <p class="text-sm">More independent</p>
+        </div>
+      </div>
+      
+      <div class="flex items-center gap-2 bg-green-50 p-4 rounded-lg my-4 border border-green-100">
+        <div class="text-xl">✏️</div>
+        <div>
+          <p><strong>Journal Prompt:</strong> What's one thing about growing up that you're excited about? What's one thing that makes you nervous?</p>
+        </div>
+      </div>
+      
+      <div class="bg-purple-50 p-4 rounded-lg my-4 border border-purple-100">
+        <h3 class="font-bold text-purple-700">Remember!</h3>
+        <ul class="list-disc pl-5">
+          <li>Everyone goes through puberty at their own pace</li>
+          <li>It's okay to ask questions about the changes you notice</li>
+          <li>Talk to trusted adults when you need guidance or support</li>
+        </ul>
+      </div>
+    `,
+    ageGroups: ["10-12"],
+    themeId: "development",
+  },
+  {
+    id: "physical-emotional-dev",
+    title: "Physical & Emotional Development",
+    description: "Understanding the changes in your body and emotions",
+    content: `
+      <div class="bg-shield-purple-light p-5 rounded-lg mb-5">
+        <h2 class="text-shield-purple font-bold text-xl">Your Changing Body</h2>
+        <p>Adolescence is a significant period of transformation. The changes you're experiencing are natural biological processes that everyone goes through, though timing and progression vary from person to person.</p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-5 my-5">
+        <div class="bg-pink-50 p-4 rounded-lg border border-pink-100">
+          <h3 class="font-bold text-pink-700">For Young Women</h3>
+          <ul class="list-disc pl-5 space-y-1 mt-2">
+            <li>Development of breasts</li>
+            <li>Growth of body hair</li>
+            <li>Widening of hips</li>
+            <li>Beginning of menstruation (periods)</li>
+            <li>Increase in body fat</li>
+          </ul>
+        </div>
+        
+        <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+          <h3 class="font-bold text-blue-700">For Young Men</h3>
+          <ul class="list-disc pl-5 space-y-1 mt-2">
+            <li>Growth of facial and body hair</li>
+            <li>Voice deepening</li>
+            <li>Development of muscles</li>
+            <li>Growth of genitals</li>
+            <li>Broadening of shoulders</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="flex items-center gap-3 bg-amber-50 p-4 rounded-lg my-5 border border-amber-100">
+        <div class="text-2xl">💭</div>
+        <div>
+          <h3 class="font-bold">Myth vs. Fact</h3>
+          <p><strong>Myth:</strong> Everyone develops at the same time and pace.<br>
+          <strong>Fact:</strong> Each person has their own unique development timeline.</p>
+        </div>
+      </div>
+      
+      <h3 class="text-shield-purple font-bold mt-5">Emotional Intelligence</h3>
+      <p>Along with physical changes come emotional developments. Learning to understand and manage your emotions is a crucial life skill.</p>
+      
+      <div class="my-5 bg-white p-4 rounded-lg border">
+        <h4 class="font-bold">The Emotional Landscape of Adolescence:</h4>
+        <div class="space-y-3 mt-3">
+          <div class="flex gap-2 items-center">
+            <div class="bg-purple-100 text-purple-700 p-2 rounded-full h-8 w-8 flex items-center justify-center font-bold">1</div>
+            <div>
+              <p><strong>Mood fluctuations</strong> - Your emotions may change quickly, which is normal due to hormonal changes</p>
+            </div>
+          </div>
+          <div class="flex gap-2 items-center">
+            <div class="bg-purple-100 text-purple-700 p-2 rounded-full h-8 w-8 flex items-center justify-center font-bold">2</div>
+            <div>
+              <p><strong>Identity exploration</strong> - You may be thinking more about who you are and who you want to become</p>
+            </div>
+          </div>
+          <div class="flex gap-2 items-center">
+            <div class="bg-purple-100 text-purple-700 p-2 rounded-full h-8 w-8 flex items-center justify-center font-bold">3</div>
+            <div>
+              <p><strong>New attractions</strong> - You may develop romantic or sexual feelings</p>
+            </div>
+          </div>
+          <div class="flex gap-2 items-center">
+            <div class="bg-purple-100 text-purple-700 p-2 rounded-full h-8 w-8 flex items-center justify-center font-bold">4</div>
+            <div>
+              <p><strong>Desire for autonomy</strong> - Seeking more independence from parents/guardians</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-green-50 p-4 rounded-lg my-5 border border-green-100">
+        <h3 class="font-bold text-green-700">Healthy Ways to Manage Emotions</h3>
+        <div class="grid grid-cols-2 gap-3 mt-3">
+          <div class="bg-white p-3 rounded border">
+            <p class="text-center">🧘‍♀️ Practice mindfulness</p>
+          </div>
+          <div class="bg-white p-3 rounded border">
+            <p class="text-center">🏃‍♂️ Regular physical activity</p>
+          </div>
+          <div class="bg-white p-3 rounded border">
+            <p class="text-center">📝 Keep a journal</p>
+          </div>
+          <div class="bg-white p-3 rounded border">
+            <p class="text-center">👥 Talk to trusted people</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-shield-purple-light p-4 rounded-lg my-5">
+        <h3 class="font-bold">Remember</h3>
+        <p>These changes can sometimes feel confusing or overwhelming, but they are a normal part of growing up. If you have questions or concerns, don't hesitate to talk to a trusted adult, healthcare provider, school counselor, or other trusted person in your life.</p>
+      </div>
+      
+      <div class="flex items-center gap-2 bg-blue-50 p-4 rounded-lg my-5 border border-blue-100">
+        <div class="text-xl">📚</div>
+        <p><strong>Self-Reflection:</strong> What's one way you can take better care of your physical and emotional health this week?</p>
+      </div>
+    `,
+    ageGroups: ["13-16", "17-18"],
     themeId: "development",
   },
   {
@@ -224,74 +433,6 @@ export const contentData: ContentItem[] = [
     `,
     ageGroups: ["3-5"],
     themeId: "health",
-  },
-  {
-    id: "puberty-changes",
-    title: "Understanding Puberty",
-    description: "Physical and emotional changes during puberty",
-    content: `
-      <h2>What Is Puberty?</h2>
-      <p>Puberty is the time when your body begins to develop and change as you move from childhood to adulthood. During puberty, your body will grow faster than at any other time in your life, except for when you were a baby.</p>
-      
-      <h3>Physical Changes</h3>
-      <ul>
-        <li>Growth spurts</li>
-        <li>Body hair growth</li>
-        <li>Skin changes</li>
-        <li>Voice changes (especially in boys)</li>
-      </ul>
-      
-      <h3>Emotional Changes</h3>
-      <p>During puberty, you might experience new and stronger emotions. This is normal! You might sometimes feel:</p>
-      <ul>
-        <li>More sensitive</li>
-        <li>Concerned about how you look</li>
-        <li>Interested in new friendships</li>
-        <li>More independent from parents</li>
-      </ul>
-      
-      <p>Remember: Everyone goes through puberty at their own pace. Some people start earlier, some start later, but everyone experiences these changes.</p>
-    `,
-    ageGroups: ["10-12"],
-    themeId: "development",
-  },
-  {
-    id: "physical-emotional-dev",
-    title: "Physical & Emotional Development",
-    description: "Understanding the changes in your body and emotions",
-    content: `
-      <h2>Your Changing Body</h2>
-      <p>During adolescence, your body goes through many changes. These changes are natural and happen to everyone, though they may start at different times and progress at different rates.</p>
-      
-      <h3>For Girls</h3>
-      <ul>
-        <li>Development of breasts</li>
-        <li>Growth of pubic and underarm hair</li>
-        <li>Widening of hips</li>
-        <li>Beginning of menstruation (periods)</li>
-      </ul>
-      
-      <h3>For Boys</h3>
-      <ul>
-        <li>Growth of pubic, facial, and body hair</li>
-        <li>Voice deepening</li>
-        <li>Development of muscles</li>
-        <li>Growth of testicles and penis</li>
-      </ul>
-      
-      <h3>Emotional Changes</h3>
-      <p>Along with physical changes come emotional changes:</p>
-      <ul>
-        <li>Mood swings</li>
-        <li>New feelings of attraction</li>
-        <li>Desire for independence</li>
-        <li>Concern about identity and belonging</li>
-      </ul>
-      
-      <p>These changes can sometimes feel confusing or overwhelming, but they are a normal part of growing up. Talk to a trusted adult if you have questions or concerns.</p>
-    `,
-    ageGroups: ["13-16", "17-18"],
-    themeId: "development",
   },
   {
     id: "my-body",
@@ -670,168 +811,3 @@ export const quizData: Quiz[] = [
     ageGroups: ["13-16", "17-18"],
     questions: [
       {
-        id: "rh-q1",
-        question: "How often should you change a sanitary pad during menstruation?",
-        options: [
-          "Once a day",
-          "Every 4-6 hours or when it becomes full",
-          "Only when it feels uncomfortable",
-          "Every 3 days"
-        ],
-        correctAnswer: 1,
-        explanation: "Sanitary pads should be changed every 4-6 hours or when they become full to maintain proper hygiene and prevent infections."
-      },
-      {
-        id: "rh-q2",
-        question: "Which of the following is NOT a way to maintain good reproductive health?",
-        options: [
-          "Regular check-ups with a healthcare provider",
-          "Practicing proper hygiene",
-          "Keeping your reproductive health concerns secret",
-          "Learning accurate information about your body"
-        ],
-        correctAnswer: 2,
-        explanation: "Keeping reproductive health concerns secret is not good for your health. It's important to discuss concerns with a trusted adult or healthcare provider."
-      },
-      {
-        id: "rh-q3",
-        question: "What is the most effective way to prevent pregnancy and sexually transmitted infections (STIs)?",
-        options: [
-          "Taking vitamins",
-          "Abstinence (not having sex)",
-          "Regular exercise",
-          "Eating healthy foods"
-        ],
-        correctAnswer: 1,
-        explanation: "Abstinence, or not having sex, is the most effective way to prevent both pregnancy and sexually transmitted infections."
-      }
-    ]
-  },
-  {
-    id: "friendship-quiz",
-    title: "Healthy Friendships",
-    description: "Test your knowledge about being a good friend",
-    themeId: "relationships",
-    ageGroups: ["6-9"],
-    questions: [
-      {
-        id: "fr-q1",
-        question: "What makes someone a good friend?",
-        options: [
-          "They take your toys without asking",
-          "They are kind and share with you",
-          "They only play with you when no one else is around",
-          "They tell you what to do all the time"
-        ],
-        correctAnswer: 1,
-        explanation: "Good friends are kind and willing to share with you. They respect you and care about your feelings."
-      },
-      {
-        id: "fr-q2",
-        question: "What should you do if a friend says something that hurts your feelings?",
-        options: [
-          "Never speak to them again",
-          "Say something mean back to hurt their feelings too",
-          "Tell them how you feel or talk to a trusted adult",
-          "Keep it a secret and feel sad"
-        ],
-        correctAnswer: 2,
-        explanation: "It's best to tell your friend how their words made you feel, or talk to a trusted adult who can help you."
-      }
-    ]
-  },
-  {
-    id: "consent-quiz",
-    title: "Consent and Boundaries",
-    description: "Test your understanding of consent in relationships",
-    themeId: "relationships",
-    ageGroups: ["13-16", "17-18"],
-    questions: [
-      {
-        id: "con-q1",
-        question: "What does consent mean?",
-        options: [
-          "Saying yes when you really want to say no",
-          "Giving permission freely and clearly for something to happen",
-          "Agreeing to something because everyone else is doing it",
-          "Following instructions without asking questions"
-        ],
-        correctAnswer: 1,
-        explanation: "Consent means giving permission freely and clearly for something to happen. It must be given without pressure or manipulation."
-      },
-      {
-        id: "con-q2",
-        question: "True or False: Once you give consent for something, you cannot change your mind.",
-        options: [
-          "True",
-          "False"
-        ],
-        correctAnswer: 1,
-        explanation: "False. Consent can be withdrawn at any time. You always have the right to change your mind."
-      },
-      {
-        id: "con-q3",
-        question: "Which of the following is an example of setting a healthy boundary?",
-        options: [
-          "Saying yes to something you're uncomfortable with to avoid conflict",
-          "Letting friends pressure you into activities you don't want to do",
-          "Clearly telling someone you're not comfortable with them touching you",
-          "Keeping your feelings to yourself to avoid upsetting others"
-        ],
-        correctAnswer: 2,
-        explanation: "Setting a boundary by clearly communicating when you're not comfortable with something, such as unwanted physical contact, is healthy and important."
-      }
-    ]
-  }
-];
-
-export const qaData: QA[] = [
-  {
-    id: "qa-1",
-    question: "When do most people start puberty?",
-    answer: "Puberty typically starts between ages 8-13 for girls and 9-14 for boys. However, everyone is different, and it's normal to start earlier or later than your friends.",
-    ageGroups: ["10-12"],
-    themeId: "development",
-    isCommonQuestion: true,
-  },
-  {
-    id: "qa-2",
-    question: "Is it normal to have painful periods?",
-    answer: "Some discomfort during periods is common, but severe pain that disrupts daily activities may need medical attention. Mild cramps can often be managed with rest, gentle exercise, warm compresses, and over-the-counter pain relievers recommended by a healthcare provider.",
-    ageGroups: ["13-16", "17-18"],
-    themeId: "health",
-    isCommonQuestion: true,
-  },
-  {
-    id: "qa-3",
-    question: "What should I do if a friend is being bullied?",
-    answer: "If you see someone being bullied, don't join in or watch silently. Support your friend by staying with them, showing kindness, and helping them tell a trusted adult like a teacher or parent. Remember that reporting bullying is not tattling—it's helping someone stay safe.",
-    ageGroups: ["6-9", "10-12"],
-    themeId: "relationships",
-    isCommonQuestion: true,
-  },
-  {
-    id: "qa-4",
-    question: "How do I know if a relationship is healthy?",
-    answer: "Healthy relationships involve mutual respect, trust, honesty, good communication, and support. Both people feel safe, comfortable, and free to be themselves. If someone makes you feel scared, controls who you talk to, insults you, or pressures you to do things you're uncomfortable with, these are warning signs of an unhealthy relationship.",
-    ageGroups: ["13-16", "17-18"],
-    themeId: "relationships",
-    isCommonQuestion: true,
-  },
-  {
-    id: "qa-5",
-    question: "How can I say no when I feel pressured to do something wrong?",
-    answer: "It can be hard to say no, but you can: 1) Use a clear, firm voice to say 'No, I don't want to.' 2) Give a reason if you want: 'I'll get in trouble' or 'That doesn't feel right to me.' 3) Suggest another activity instead. 4) If needed, walk away and find friends who respect your choices. Remember, real friends will respect your decisions.",
-    ageGroups: ["10-12", "13-16"],
-    themeId: "values",
-    isCommonQuestion: true,
-  },
-  {
-    id: "qa-6",
-    question: "Can boys and girls like the same activities?",
-    answer: "Yes! While some societies have traditions about what boys and girls should like, interests and talents don't actually depend on gender. Girls can excel at science, math, or sports, and boys can be great at cooking, art, or caring for others. Everyone should have the chance to explore different activities and develop their unique skills and interests.",
-    ageGroups: ["6-9", "10-12"],
-    themeId: "culture",
-    isCommonQuestion: true,
-  }
-];

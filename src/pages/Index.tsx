@@ -24,7 +24,7 @@ const Index = () => {
   };
 
   // Filter out culture theme
-  const filteredThemeData = themeData.filter(theme => theme.id !== 'culture');
+  const filteredThemeData = themeData.filter(theme => theme.id !== "culture");
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
@@ -39,7 +39,7 @@ const Index = () => {
               </div>
               <h1 className="text-3xl font-bold text-shield-purple mb-2">Teen Shield</h1>
               <p className="text-muted-foreground">
-                Age-appropriate sex education for Ugandan youth
+                Age-appropriate education for Ugandan youth
               </p>
             </div>
             
@@ -103,13 +103,6 @@ const Index = () => {
                   </div>
                 </Card>
               </Link>
-            </div>
-            
-            <div className="bg-muted p-4 rounded-lg text-center text-sm">
-              <p className="text-muted-foreground">
-                Content is aligned with educational standards and 
-                designed to promote healthy development.
-              </p>
             </div>
           </div>
         )}
