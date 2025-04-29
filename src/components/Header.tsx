@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, Home, BookOpen, HelpCircle, Settings, Shield, User, Download, Check } from "lucide-react";
+import { Menu, X, Home, BookOpen, HelpCircle, Settings, Shield, User, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -15,7 +15,7 @@ const Header = () => {
   return (
     <header className="bg-white sticky top-0 z-50 shadow-sm">
       <div className="teen-shield-container flex justify-between items-center py-3">
-        <Link to="/" className="flex items-center gap-2">
+        <Link to="/home" className="flex items-center gap-2">
           <Shield className="h-8 w-8 text-shield-purple" />
           <h1 className="text-xl font-bold text-shield-purple">
             Teen <span className="text-shield-blue">Shield</span>
@@ -44,7 +44,7 @@ const Header = () => {
           <ul className="flex flex-col space-y-4 p-6 md:flex-row md:space-x-6 md:space-y-0 md:p-0">
             <li>
               <Link
-                to="/"
+                to="/home"
                 className="flex items-center gap-2 text-gray-700 hover:text-shield-purple"
                 onClick={() => setIsMenuOpen(false)}
               >

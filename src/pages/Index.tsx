@@ -1,6 +1,6 @@
 
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Shield, BookOpen, MessageSquare, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AgeSelector, { AgeGroup } from "@/components/AgeSelector";
@@ -12,6 +12,17 @@ import ThemeCard from "@/components/ThemeCard";
 const Index = () => {
   const [selectedAge, setSelectedAge] = useState<AgeGroup | null>(null);
   const [ageConfirmed, setAgeConfirmed] = useState(false);
+  const navigate = useNavigate();
+
+  // Check if user is coming from welcome page with age parameter
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const ageParam = urlParams.get('age') as AgeGroup | null;
+    if (ageParam) {
+      setSelectedAge(ageParam);
+      setAgeConfirmed(true);
+    }
+  }, []);
 
   const handleSelectAge = (age: AgeGroup) => {
     setSelectedAge(age);
@@ -20,6 +31,12 @@ const Index = () => {
   const confirmAgeSelection = () => {
     if (selectedAge) {
       setAgeConfirmed(true);
+    }
+  };
+
+  const handleLearnMore = () => {
+    if (selectedAge) {
+      navigate(`/learn?age=${selectedAge}`);
     }
   };
 
@@ -56,7 +73,7 @@ const Index = () => {
                       className="teen-shield-btn" 
                       onClick={confirmAgeSelection}
                     >
-                      Start Learning
+                      Continue
                     </Button>
                   </div>
                 )}
@@ -73,8 +90,19 @@ const Index = () => {
             </div>
             
             <div className="space-y-5 mb-8">
-              <h3 className="text-lg font-medium">Learning Themes</h3>
-              {filteredThemeData.map((theme) => (
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-medium">Learning Themes</h3>
+                <Button 
+                  variant="ghost" 
+                  className="text-shield-purple hover:text-shield-purple/90"
+                  onClick={handleLearnMore}
+                >
+                  See all
+                </Button>
+              </div>
+              
+              {/* Only show 2 themes on the home page for preview */}
+              {filteredThemeData.slice(0, 2).map((theme) => (
                 <ThemeCard key={theme.id} theme={theme} ageGroup={selectedAge} />
               ))}
             </div>
