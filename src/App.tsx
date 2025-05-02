@@ -14,6 +14,8 @@ import NotFound from "./pages/NotFound";
 import Learn from "./pages/Learn";
 import Profile from "./pages/Profile";
 import Offline from "./pages/Offline";
+import GuestOnboarding from "./pages/GuestOnboarding";
+import ParentSetup from "./pages/ParentSetup";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +35,8 @@ const App = () => (
           <Route path="/profile" element={<Profile />} />
           <Route path="/offline" element={<Offline />} />
           <Route path="/parent" element={<ParentArea />} />
+          <Route path="/guest-onboarding" element={<GuestOnboarding />} />
+          <Route path="/parent-setup" element={<ParentSetup />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
