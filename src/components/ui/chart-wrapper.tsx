@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { ReactNode } from "react";
 import {
   ResponsiveContainer,
   LineChart,
@@ -34,7 +34,7 @@ interface ChartProps {
   indexAxis: string;
   datasets: ChartDataset[];
   options?: any;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }
 
 interface ChartTitleProps {
@@ -135,6 +135,7 @@ export const Chart = ({ type, data, indexAxis, datasets, options, children }: Ch
           </PieChart>
         </ResponsiveContainer>
       )}
+      {children}
     </ChartContainer>
   );
 };

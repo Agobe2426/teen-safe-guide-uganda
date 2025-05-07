@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, LineChart, BarChart, Calendar, BookOpen, User, Filter } from "lucide-react";
 import Header from "@/components/Header";
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { AgeGroup } from "@/components/AgeSelector";
@@ -15,50 +15,40 @@ import { Chart, ChartTitle } from "@/components/ui/chart-wrapper";
 import { initializeUserLearningData } from "@/utils/aiHelper";
 import { themeData } from "@/data/content";
 
+// AdminInsights Component
 const AdminInsights = () => {
-  const [timeframe, setTimeframe] = useState<"week" | "month" | "year">("week");
-  const [ageFilter, setAgeFilter] = useState<AgeGroup | "all">("all");
-  const [activeTab, setActiveTab] = useState("usage");
-  
-  // Get learning data for analytics
-  const learningData = initializeUserLearningData();
-  
-  // Sample analytics data (in a real app this would come from backend)
-  const usageData = [
-    { name: "Monday", users: 120, sessions: 150 },
-    { name: "Tuesday", users: 132, sessions: 165 },
-    { name: "Wednesday", users: 101, sessions: 125 },
-    { name: "Thursday", users: 134, sessions: 178 },
-    { name: "Friday", users: 90, sessions: 120 },
-    { name: "Saturday", users: 230, sessions: 340 },
-    { name: "Sunday", users: 210, sessions: 290 },
+  const [dateRange, setDateRange] = useState("30");
+  const [ageGroupFilter, setAgeGroupFilter] = useState("all");
+
+  const handleDateRangeChange = (value: string) => {
+    setDateRange(value);
+  };
+
+  const handleAgeGroupFilterChange = (value: string) => {
+    setAgeGroupFilter(value);
+  };
+
+  // Example data for charts
+  const userProgressData = [
+    { name: "Week 1", completed: 5, attempted: 8 },
+    { name: "Week 2", completed: 8, attempted: 10 },
+    { name: "Week 3", completed: 12, attempted: 15 },
+    { name: "Week 4", completed: 15, attempted: 18 },
   ];
-  
-  // Get topic completion data based on available themes
-  const topicCompletionData = themeData
-    .filter(theme => theme.id !== "culture")
-    .map(theme => ({
-      name: theme.title,
-      completed: Math.floor(Math.random() * 100), // Would be real data in production
-      avgDuration: Math.floor(Math.random() * 10) + 5,
-    }));
-  
-  // Age distribution data
-  const ageDistributionData = [
-    { name: "3-5", users: 75 },
-    { name: "6-9", users: 120 },
-    { name: "10-12", users: 210 },
-    { name: "13-16", users: 180 },
-    { name: "17-18", users: 95 },
+
+  const ageDistribution = [
+    { name: "3-5", value: 15 },
+    { name: "6-9", value: 25 },
+    { name: "10-12", value: 30 },
+    { name: "13-16", value: 20 },
+    { name: "17-18", value: 10 },
   ];
-  
-  // Quiz performance data
-  const quizPerformanceData = [
-    { name: "Health Basics", avgScore: 92 },
-    { name: "Relationship Skills", avgScore: 78 },
-    { name: "Body Development", avgScore: 85 },
-    { name: "Safety Rules", avgScore: 95 },
-    { name: "Values and Ethics", avgScore: 82 },
+
+  const topicEngagement = [
+    { name: "Development", views: 120, completion: 85 },
+    { name: "Health", views: 95, completion: 70 },
+    { name: "Relationships", views: 110, completion: 75 },
+    { name: "Values", views: 85, completion: 65 },
   ];
 
   return (
@@ -66,51 +56,48 @@ const AdminInsights = () => {
       <Header />
       
       <main className="flex-grow">
-        <div className="teen-shield-container">
+        <div className="container mx-auto px-4 py-6">
           <div className="mb-6">
             <Link to="/" className="inline-flex items-center text-muted-foreground hover:text-foreground mb-4">
               <ArrowLeft className="h-4 w-4 mr-1" />
               Back to Home
             </Link>
             
-            <div className="flex justify-between items-center">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
               <div>
                 <h1 className="text-2xl font-bold">Admin Insights</h1>
-                <p className="text-muted-foreground">
-                  Content performance and user analytics
-                </p>
+                <p className="text-muted-foreground">Analytics and performance metrics</p>
               </div>
               
-              <div className="flex gap-2">
-                <div>
-                  <Label htmlFor="timeframe" className="sr-only">Timeframe</Label>
-                  <Select value={timeframe} onValueChange={(value: "week" | "month" | "year") => setTimeframe(value)}>
-                    <SelectTrigger id="timeframe" className="w-[140px]">
-                      <Calendar className="h-4 w-4 mr-2" />
-                      <SelectValue placeholder="Timeframe" />
+              <div className="flex flex-col sm:flex-row gap-3">
+                <div className="grid gap-1.5">
+                  <Label htmlFor="date-filter">Date Range</Label>
+                  <Select defaultValue="30" onValueChange={handleDateRangeChange}>
+                    <SelectTrigger id="date-filter" className="w-[120px]">
+                      <SelectValue placeholder="Date range" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="week">Last Week</SelectItem>
-                      <SelectItem value="month">Last Month</SelectItem>
-                      <SelectItem value="year">Last Year</SelectItem>
+                      <SelectItem value="7">7 days</SelectItem>
+                      <SelectItem value="30">30 days</SelectItem>
+                      <SelectItem value="90">90 days</SelectItem>
+                      <SelectItem value="all">All time</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 
-                <div>
-                  <Label htmlFor="ageGroup" className="sr-only">Age Group</Label>
-                  <Select value={ageFilter} onValueChange={(value: AgeGroup | "all") => setAgeFilter(value)}>
-                    <SelectTrigger id="ageGroup" className="w-[140px]">
-                      <Filter className="h-4 w-4 mr-2" />
-                      <SelectValue placeholder="Age Group" />
+                <div className="grid gap-1.5">
+                  <Label htmlFor="age-filter">Age Group</Label>
+                  <Select defaultValue="all" onValueChange={handleAgeGroupFilterChange}>
+                    <SelectTrigger id="age-filter" className="w-[120px]">
+                      <SelectValue placeholder="Age group" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="all">All Ages</SelectItem>
-                      <SelectItem value="3-5">Ages 3-5</SelectItem>
-                      <SelectItem value="6-9">Ages 6-9</SelectItem>
-                      <SelectItem value="10-12">Ages 10-12</SelectItem>
-                      <SelectItem value="13-16">Ages 13-16</SelectItem>
-                      <SelectItem value="17-18">Ages 17-18</SelectItem>
+                      <SelectItem value="all">All ages</SelectItem>
+                      <SelectItem value="3-5">3-5 years</SelectItem>
+                      <SelectItem value="6-9">6-9 years</SelectItem>
+                      <SelectItem value="10-12">10-12 years</SelectItem>
+                      <SelectItem value="13-16">13-16 years</SelectItem>
+                      <SelectItem value="17-18">17-18 years</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -118,159 +105,177 @@ const AdminInsights = () => {
             </div>
           </div>
           
-          <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="usage" className="text-xs sm:text-sm">
-                <LineChart className="h-4 w-4 mr-1 hidden sm:inline" />
-                Usage
-              </TabsTrigger>
-              <TabsTrigger value="content" className="text-xs sm:text-sm">
-                <BookOpen className="h-4 w-4 mr-1 hidden sm:inline" />
-                Content
-              </TabsTrigger>
-              <TabsTrigger value="demographics" className="text-xs sm:text-sm">
-                <User className="h-4 w-4 mr-1 hidden sm:inline" />
-                Demographics
-              </TabsTrigger>
-              <TabsTrigger value="performance" className="text-xs sm:text-sm">
-                <BarChart className="h-4 w-4 mr-1 hidden sm:inline" />
-                Performance
-              </TabsTrigger>
-            </TabsList>
-            
-            <TabsContent value="usage">
-              <Card className="teen-shield-card p-4">
-                <h3 className="font-bold mb-4">App Usage Over Time</h3>
-                <div className="h-80 w-full">
-                  <Chart
-                    type="line"
-                    data={usageData}
-                    indexAxis="name"
-                    datasets={[
-                      {
-                        label: "Unique Users",
-                        data: "users",
-                        borderColor: "#8b5cf6",
-                        backgroundColor: "transparent",
-                      },
-                      {
-                        label: "Sessions",
-                        data: "sessions",
-                        borderColor: "#3b82f6",
-                        backgroundColor: "transparent",
-                      },
-                    ]}
-                    options={{
-                      responsive: true,
-                      maintainAspectRatio: false,
-                    }}
-                  >
-                    <ChartTooltip />
-                    <ChartLegend />
-                    <ChartTitle text="Daily Active Users and Sessions" />
-                  </Chart>
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            <Card className="p-5">
+              <div className="flex justify-between items-start mb-4">
+                <div className="bg-shield-purple-light p-3 rounded-lg">
+                  <User className="h-5 w-5 text-shield-purple" />
                 </div>
-              </Card>
-            </TabsContent>
+                <Button variant="ghost" size="sm">Details</Button>
+              </div>
+              <h3 className="text-2xl font-bold">476</h3>
+              <p className="text-muted-foreground">Total Active Users</p>
+              <p className="text-sm text-green-600 mt-2">↑ 12% from last month</p>
+            </Card>
             
-            <TabsContent value="content">
-              <Card className="teen-shield-card p-4">
-                <h3 className="font-bold mb-4">Topic Completion Analysis</h3>
-                <div className="h-80 w-full">
-                  <Chart
-                    type="bar"
-                    data={topicCompletionData}
-                    indexAxis="name"
-                    datasets={[
-                      {
-                        label: "Completion Rate (%)",
-                        data: "completed",
-                        backgroundColor: "#8b5cf6",
-                      },
-                      {
-                        label: "Avg Time (min)",
-                        data: "avgDuration",
-                        backgroundColor: "#3b82f6",
-                      },
-                    ]}
-                    options={{
-                      responsive: true,
-                      maintainAspectRatio: false,
-                    }}
-                  >
-                    <ChartTooltip />
-                    <ChartLegend />
-                    <ChartTitle text="Content Engagement by Theme" />
-                  </Chart>
+            <Card className="p-5">
+              <div className="flex justify-between items-start mb-4">
+                <div className="bg-shield-soft-blue p-3 rounded-lg">
+                  <BookOpen className="h-5 w-5 text-shield-blue" />
                 </div>
-              </Card>
-            </TabsContent>
+                <Button variant="ghost" size="sm">Details</Button>
+              </div>
+              <h3 className="text-2xl font-bold">1,280</h3>
+              <p className="text-muted-foreground">Topic Views</p>
+              <p className="text-sm text-green-600 mt-2">↑ 8% from last month</p>
+            </Card>
             
-            <TabsContent value="demographics">
-              <Card className="teen-shield-card p-4">
-                <h3 className="font-bold mb-4">User Age Distribution</h3>
-                <div className="h-80 w-full">
-                  <Chart
-                    type="pie"
-                    data={ageDistributionData}
-                    indexAxis="name"
-                    datasets={[
-                      {
-                        data: "users",
-                        backgroundColor: [
-                          "#c4b5fd",
-                          "#a78bfa",
-                          "#8b5cf6",
-                          "#7c3aed",
-                          "#6d28d9",
-                        ],
-                      },
-                    ]}
-                    options={{
-                      responsive: true,
-                      maintainAspectRatio: false,
-                    }}
-                  >
-                    <ChartTooltip />
-                    <ChartLegend />
-                    <ChartTitle text="Users by Age Group" />
-                  </Chart>
+            <Card className="p-5">
+              <div className="flex justify-between items-start mb-4">
+                <div className="bg-shield-soft-pink p-3 rounded-lg">
+                  <Calendar className="h-5 w-5 text-pink-500" />
                 </div>
-              </Card>
-            </TabsContent>
-            
-            <TabsContent value="performance">
-              <Card className="teen-shield-card p-4">
-                <h3 className="font-bold mb-4">Quiz Performance Analysis</h3>
-                <div className="h-80 w-full">
-                  <Chart
-                    type="bar"
-                    data={quizPerformanceData}
-                    indexAxis="name"
-                    datasets={[
-                      {
-                        label: "Average Score (%)",
-                        data: "avgScore",
-                        backgroundColor: "#8b5cf6",
-                      },
-                    ]}
-                    options={{
-                      responsive: true,
-                      maintainAspectRatio: false,
-                    }}
-                  >
-                    <ChartTooltip />
-                    <ChartLegend />
-                    <ChartTitle text="Quiz Performance by Topic" />
-                  </Chart>
-                </div>
-              </Card>
-            </TabsContent>
-          </Tabs>
+                <Button variant="ghost" size="sm">Details</Button>
+              </div>
+              <h3 className="text-2xl font-bold">18.5</h3>
+              <p className="text-muted-foreground">Avg. Minutes per Session</p>
+              <p className="text-sm text-green-600 mt-2">↑ 5% from last month</p>
+            </Card>
+          </div>
           
-          <div className="text-xs text-muted-foreground text-center my-6">
-            <p>This data is anonymized and used only for improving educational content.</p>
-            <p>No personally identifying information is collected or stored.</p>
+          <div className="grid lg:grid-cols-2 gap-6 mb-6">
+            <Card className="p-5">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="font-bold">User Progress Over Time</h3>
+                <LineChart className="h-5 w-5 text-muted-foreground" />
+              </div>
+              <div className="h-[300px]">
+                <Chart 
+                  type="line"
+                  data={userProgressData}
+                  indexAxis="name"
+                  datasets={[
+                    {
+                      label: "Lessons Completed",
+                      data: "completed",
+                      borderColor: "#8b5cf6",
+                    },
+                    {
+                      label: "Lessons Attempted",
+                      data: "attempted",
+                      borderColor: "#94a3b8",
+                    }
+                  ]}
+                />
+                <ChartTitle text="Weekly Learning Progress" />
+              </div>
+            </Card>
+            
+            <Card className="p-5">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="font-bold">Content Engagement by Topic</h3>
+                <BarChart className="h-5 w-5 text-muted-foreground" />
+              </div>
+              <div className="h-[300px]">
+                <Chart 
+                  type="bar"
+                  data={topicEngagement}
+                  indexAxis="name"
+                  datasets={[
+                    {
+                      label: "Views",
+                      data: "views",
+                      backgroundColor: "#8b5cf6",
+                    },
+                    {
+                      label: "Completion",
+                      data: "completion",
+                      backgroundColor: "#c4b5fd",
+                    }
+                  ]}
+                />
+                <ChartTitle text="Topic Performance Metrics" />
+              </div>
+            </Card>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="md:col-span-1">
+              <Card className="p-5 h-full">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="font-bold">User Age Distribution</h3>
+                  <Filter className="h-4 w-4 text-muted-foreground" />
+                </div>
+                <div className="h-[300px]">
+                  <Chart 
+                    type="pie"
+                    data={ageDistribution}
+                    indexAxis="name"
+                    datasets={[
+                      {
+                        label: "Users",
+                        data: "value",
+                        backgroundColor: "#c4b5fd",
+                      }
+                    ]}
+                  />
+                  <ChartTitle text="Users by Age Group" />
+                </div>
+              </Card>
+            </div>
+            
+            <div className="md:col-span-2">
+              <Card className="p-5">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="font-bold">Most Popular Content</h3>
+                  <Button variant="ghost" size="sm">View All</Button>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="text-left border-b">
+                        <th className="pb-2">Topic</th>
+                        <th className="pb-2">Age Group</th>
+                        <th className="pb-2 text-right">Views</th>
+                        <th className="pb-2 text-right">Completion %</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b">
+                        <td className="py-3">Understanding Puberty</td>
+                        <td>10-12 years</td>
+                        <td className="text-right">245</td>
+                        <td className="text-right text-green-600">87%</td>
+                      </tr>
+                      <tr className="border-b">
+                        <td className="py-3">Healthy Relationships</td>
+                        <td>13-16 years</td>
+                        <td className="text-right">218</td>
+                        <td className="text-right text-green-600">82%</td>
+                      </tr>
+                      <tr className="border-b">
+                        <td className="py-3">Family and Friends</td>
+                        <td>3-5 years</td>
+                        <td className="text-right">196</td>
+                        <td className="text-right text-green-600">91%</td>
+                      </tr>
+                      <tr className="border-b">
+                        <td className="py-3">Physical & Emotional Development</td>
+                        <td>13-16 years</td>
+                        <td className="text-right">185</td>
+                        <td className="text-right text-green-600">79%</td>
+                      </tr>
+                      <tr>
+                        <td className="py-3">Personal Safety and Respect</td>
+                        <td>6-9 years</td>
+                        <td className="text-right">172</td>
+                        <td className="text-right text-green-600">88%</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </Card>
+            </div>
           </div>
         </div>
       </main>
