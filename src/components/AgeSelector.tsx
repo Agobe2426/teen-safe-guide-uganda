@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -41,7 +42,6 @@ const ageGroups: Array<{ id: AgeGroup; label: string; description: string }> = [
 const AgeSelector: React.FC<AgeSelectorProps> = ({ selectedAge, onSelectAge }) => {
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-bold text-center">Select Your Age Group</h2>
       <p className="text-muted-foreground text-center text-sm mb-4">
         Content will be customized based on your age group
       </p>
@@ -65,12 +65,6 @@ const AgeSelector: React.FC<AgeSelectorProps> = ({ selectedAge, onSelectAge }) =
           </Card>
         ))}
       </div>
-      
-      {selectedAge && (
-        <div className="flex justify-center mt-4">
-          <Button className="teen-shield-btn">Continue</Button>
-        </div>
-      )}
     </div>
   );
 };
