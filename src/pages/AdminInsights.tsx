@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, LineChart, BarChart, Calendar, BookOpen, User, Filter } from "lucide-react";
@@ -9,11 +8,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label";
 import { AgeGroup } from "@/components/AgeSelector";
 import {
-  Chart,
   ChartLegend,
   ChartTooltip,
-  ChartTitle
 } from "@/components/ui/chart";
+import { Chart, ChartTitle } from "@/components/ui/chart-wrapper";
 import { initializeUserLearningData } from "@/utils/aiHelper";
 import { themeData } from "@/data/content";
 
