@@ -16,6 +16,7 @@ import Profile from "./pages/Profile";
 import Offline from "./pages/Offline";
 import GuestOnboarding from "./pages/GuestOnboarding";
 import ParentSetup from "./pages/ParentSetup";
+import AdminInsights from "./pages/AdminInsights";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +38,7 @@ const App = () => (
           <Route path="/parent" element={<ParentArea />} />
           <Route path="/guest-onboarding" element={<GuestOnboarding />} />
           <Route path="/parent-setup" element={<ParentSetup />} />
+          <Route path="/admin-insights" element={<AdminInsights />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

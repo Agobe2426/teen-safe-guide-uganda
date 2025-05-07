@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams, Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Sparkles } from "lucide-react";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -10,6 +10,7 @@ import { ThemeType } from "@/components/ThemeCard";
 import { contentData, themeData, quizData, ContentItem, Quiz } from "@/data/content";
 import { AgeGroup } from "@/components/AgeSelector";
 import VoiceReader from "@/components/VoiceReader";
+import { trackTopicView, getPersonalizedRecommendations } from "@/utils/aiHelper";
 
 // Map of age-appropriate headings for each theme and age group
 const ageAppropriateHeadings: Record<AgeGroup, Record<string, string>> = {
@@ -55,6 +56,8 @@ const ThemeDetail = () => {
   const [theme, setTheme] = useState(filteredThemeData.find(t => t.id === themeId));
   const [content, setContent] = useState<ContentItem[]>([]);
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
+  const [recommendations, setRecommendations] = useState<string[]>([]);
+  const [pageLoadTime, setPageLoadTime] = useState(Date.now());
   
   useEffect(() => {
     if (themeId && ageGroup) {
@@ -69,7 +72,28 @@ const ThemeDetail = () => {
         q => q.themeId === themeId as ThemeType && q.ageGroups.includes(ageGroup)
       );
       setQuizzes(filteredQuizzes);
+      
+      // Track this topic view for personalized learning
+      if (themeId) {
+        trackTopicView(themeId);
+      }
+      
+      // Reset page load time for accurate time tracking
+      setPageLoadTime(Date.now());
+      
+      // Get personalized recommendations
+      if (ageGroup) {
+        const recs = getPersonalizedRecommendations(ageGroup, themeId as ThemeType);
+        setRecommendations(recs);
+      }
     }
+    
+    // Track how long user spends on this page
+    return () => {
+      const timeSpent = (Date.now() - pageLoadTime) / 1000; // in seconds
+      console.log(`User spent ${timeSpent} seconds on ${themeId} theme`);
+      // In a real app, we would send this to analytics or use for personalization
+    };
   }, [themeId, ageGroup]);
 
   // Get the age-appropriate heading for the current theme
@@ -145,6 +169,36 @@ const ThemeDetail = () => {
                 text={getPlainTextContent()} 
                 ageGroup={ageGroup}
               />
+              
+              {/* Personalized Recommendations */}
+              {recommendations.length > 0 && (
+                <Card className="teen-shield-card bg-shield-soft-blue">
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2">
+                      <Sparkles className="h-5 w-5 text-shield-blue" />
+                      <h3 className="font-bold">Personalized for You</h3>
+                    </div>
+                    <div className="space-y-2">
+                      {recommendations.map((rec, index) => {
+                        const isTheme = rec.startsWith("theme-");
+                        const id = rec.split("-").slice(1).join("-");
+                        return (
+                          <Link 
+                            key={index}
+                            to={isTheme ? `/theme/${id}?age=${ageGroup}` : `/quiz/${id}?theme=${themeId}&age=${ageGroup}`}
+                            className="block p-3 bg-white rounded-md hover:bg-gray-50 transition-colors"
+                          >
+                            <div className="flex justify-between items-center">
+                              <span>{isTheme ? `Explore: ${id}` : `Try Quiz: ${id}`}</span>
+                              <ArrowLeft className="h-4 w-4 rotate-180" />
+                            </div>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </Card>
+              )}
               
               {quizzes.length > 0 && (
                 <div className="space-y-4 mt-8">

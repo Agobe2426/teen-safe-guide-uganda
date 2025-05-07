@@ -1,13 +1,14 @@
 
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Shield, BookOpen, MessageSquare, Settings } from "lucide-react";
+import { Shield, BookOpen, MessageSquare, Settings, BarChart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AgeSelector, { AgeGroup } from "@/components/AgeSelector";
 import Header from "@/components/Header";
 import { Card, CardContent } from "@/components/ui/card";
 import { themeData } from "@/data/content";
 import ThemeCard from "@/components/ThemeCard";
+import { initializeUserLearningData } from "@/utils/aiHelper";
 
 const Index = () => {
   const [selectedAge, setSelectedAge] = useState<AgeGroup | null>(null);
@@ -22,6 +23,9 @@ const Index = () => {
       setSelectedAge(ageParam);
       setAgeConfirmed(true);
     }
+    
+    // Initialize learning data for the user
+    initializeUserLearningData();
   }, []);
 
   const handleSelectAge = (age: AgeGroup) => {
@@ -132,6 +136,20 @@ const Index = () => {
                 </Card>
               </Link>
             </div>
+            
+            <Link to="/admin-insights" className="block mb-6">
+              <Card className="teen-shield-card hover:bg-muted/50 transition-colors">
+                <div className="p-4 flex items-center gap-3">
+                  <div className="bg-shield-purple-light p-2 rounded-full">
+                    <BarChart className="h-5 w-5 text-shield-purple" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold">Admin Insights</h3>
+                    <p className="text-xs text-muted-foreground">View content performance analytics</p>
+                  </div>
+                </div>
+              </Card>
+            </Link>
           </div>
         )}
       </main>
