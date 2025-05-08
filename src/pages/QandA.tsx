@@ -8,13 +8,47 @@ import SafeQA from "@/components/SafeQA";
 import TeenChatbot from "@/components/TeenChatbot";
 import { AgeGroup } from "@/components/AgeSelector";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { QA } from "@/data/content";
+
+// Define a QA type if it doesn't exist elsewhere
+export interface QA {
+  id: string;
+  question: string;
+  answer: string;
+  ageGroups: AgeGroup[];
+}
+
+// Sample QA data until we have real data
+const sampleQaData: QA[] = [
+  {
+    id: "q1",
+    question: "What are the changes that happen during puberty?",
+    answer: "During puberty, bodies change in many ways. Boys may experience voice changes, growth in height, and body hair development. Girls may experience breast development, menstruation, and changes in body shape. Both may experience increased emotions, attraction to others, and skin changes like acne.",
+    ageGroups: ["10-12", "13-16", "17-18"]
+  },
+  {
+    id: "q2",
+    question: "How do I know my body is developing normally?",
+    answer: "Everyone develops at their own pace. Some people start puberty earlier, and some later. If you have concerns about your development, it's always good to talk to a parent, trusted adult, or healthcare provider.",
+    ageGroups: ["10-12", "13-16", "17-18"]
+  },
+  {
+    id: "q3",
+    question: "Why do I need to wash my hands?",
+    answer: "Washing hands helps remove germs that can make you sick. It's important to wash hands before eating, after using the toilet, and after touching animals.",
+    ageGroups: ["3-5", "6-9"]
+  }
+];
 
 const QandA = () => {
   const [searchParams] = useSearchParams();
   const ageGroup = searchParams.get("age") as AgeGroup | null;
   const [userQuestions, setUserQuestions] = useState<string[]>([]);
   const [activeTab, setActiveTab] = useState<string>("chatbot");
+
+  // Filter questions by age group if selected
+  const filteredQuestions = ageGroup
+    ? sampleQaData.filter(qa => qa.ageGroups.includes(ageGroup))
+    : sampleQaData;
 
   const handleNewQuestion = (question: string) => {
     setUserQuestions([...userQuestions, question]);
@@ -51,6 +85,7 @@ const QandA = () => {
             
             <TabsContent value="qa" className="mt-0">
               <SafeQA
+                questions={filteredQuestions}
                 onAskQuestion={handleNewQuestion}
                 ageGroup={ageGroup || undefined}
               />
