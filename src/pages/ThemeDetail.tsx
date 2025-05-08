@@ -7,9 +7,12 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import QuizCard from "@/components/QuizCard";
 import { ThemeType } from "@/components/ThemeCard";
-import { contentData, themeData, quizData, ContentItem, Quiz } from "@/data/content";
+import { contentData, quizData, ContentItem, Quiz } from "@/data/content";
 import { AgeGroup } from "@/components/AgeSelector";
 import VoiceReader from "@/components/VoiceReader";
+
+// Local Storage key for saved themes - must match the one in Learn.tsx
+const SAVED_THEMES_KEY = "teen_shield_learning_modules";
 
 // Map of age-appropriate headings for each theme and age group
 const ageAppropriateHeadings: Record<AgeGroup, Record<string, string>> = {
@@ -50,8 +53,22 @@ const ThemeDetail = () => {
   const [searchParams] = useSearchParams();
   const ageGroup = searchParams.get("age") as AgeGroup;
   
-  // Filter out culture theme from themeData
-  const filteredThemeData = themeData.filter(t => t.id !== "culture");
+  // Get themes from localStorage to ensure consistency
+  const getThemes = () => {
+    const savedThemes = localStorage.getItem(SAVED_THEMES_KEY);
+    
+    if (savedThemes) {
+      return JSON.parse(savedThemes);
+    } else {
+      // If not in localStorage for some reason, filter out culture theme
+      const filtered = themeData.filter(t => t.id !== "culture");
+      // Save to localStorage for future consistency
+      localStorage.setItem(SAVED_THEMES_KEY, JSON.stringify(filtered));
+      return filtered;
+    }
+  };
+
+  const filteredThemeData = getThemes();
   const [theme, setTheme] = useState(filteredThemeData.find(t => t.id === themeId));
   const [content, setContent] = useState<ContentItem[]>([]);
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
