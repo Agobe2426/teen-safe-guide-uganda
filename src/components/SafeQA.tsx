@@ -1,73 +1,53 @@
 
-import React, { useState } from "react";
-import { AgeGroup } from "@/components/AgeSelector";
-import { QA } from "@/data/content";
+import { useState } from "react";
+import { SendHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { qaData } from "@/data/content";
-import { useToast } from "@/hooks/use-toast";
+import { AgeGroup } from "@/components/AgeSelector";
+import { QA } from "@/pages/QandA";
 
-interface SafeQAProps {
-  questions?: QA[];
-  ageGroup?: AgeGroup;
+export interface SafeQAProps {
   onAskQuestion: (question: string) => void;
+  ageGroup?: AgeGroup;
+  questions: QA[];
 }
 
-const SafeQA: React.FC<SafeQAProps> = ({ ageGroup, onAskQuestion }) => {
+const SafeQA = ({ onAskQuestion, ageGroup, questions }: SafeQAProps) => {
   const [newQuestion, setNewQuestion] = useState("");
-  const { toast } = useToast();
-  
-  // Filter questions by age group if provided
-  const filteredQuestions = ageGroup
-    ? qaData.filter(qa => qa.ageGroups.includes(ageGroup) && qa.isCommonQuestion)
-    : qaData.filter(qa => qa.isCommonQuestion);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (newQuestion.trim()) {
-      onAskQuestion(newQuestion);
+      onAskQuestion(newQuestion.trim());
       setNewQuestion("");
-      
-      toast({
-        title: "Question Submitted",
-        description: "Thank you for your question! Our educators will review it soon.",
-      });
     }
   };
 
   return (
     <div className="space-y-6">
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <h2 className="text-lg font-medium">Ask a Question</h2>
-        <div className="flex gap-2">
-          <Input
-            value={newQuestion}
-            onChange={(e) => setNewQuestion(e.target.value)}
-            placeholder="Type your question here..."
-            className="flex-grow"
-          />
-          <Button type="submit" disabled={!newQuestion.trim()}>
-            Submit
-          </Button>
-        </div>
-        <p className="text-xs text-muted-foreground">
-          Your question will be anonymous and answered by our trained educators.
-        </p>
+      <form onSubmit={handleSubmit} className="flex gap-2">
+        <Input
+          placeholder="Ask a question about growing up safely..."
+          value={newQuestion}
+          onChange={(e) => setNewQuestion(e.target.value)}
+          className="flex-grow"
+        />
+        <Button type="submit">
+          <SendHorizontal className="h-4 w-4" />
+        </Button>
       </form>
 
       <div className="space-y-4">
-        <h2 className="text-lg font-medium">Common Questions</h2>
+        <h2 className="text-xl font-bold">Frequently Asked Questions</h2>
         <Accordion type="single" collapsible className="w-full">
-          {filteredQuestions.map((qa) => (
+          {questions.map((qa) => (
             <AccordionItem key={qa.id} value={qa.id}>
               <AccordionTrigger className="text-left">
                 {qa.question}
               </AccordionTrigger>
               <AccordionContent>
-                <div className="p-2 bg-gray-50 rounded-md">
-                  {qa.answer}
-                </div>
+                <p className="text-muted-foreground">{qa.answer}</p>
               </AccordionContent>
             </AccordionItem>
           ))}
