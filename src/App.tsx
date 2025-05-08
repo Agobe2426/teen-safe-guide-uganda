@@ -14,6 +14,7 @@ import NotFound from "./pages/NotFound";
 import Learn from "./pages/Learn";
 import Profile from "./pages/Profile";
 import Offline from "./pages/Offline";
+import YoungLearningModule from "./pages/YoungLearningModule";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/profile" element={<Profile />} />
           <Route path="/offline" element={<Offline />} />
           <Route path="/parent" element={<ParentArea />} />
+          <Route path="/young-learning" element={<YoungLearningModule />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
