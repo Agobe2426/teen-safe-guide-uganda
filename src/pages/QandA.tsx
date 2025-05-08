@@ -5,8 +5,9 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import SafeQA from "@/components/SafeQA";
-// Remove the qaData import as it doesn't exist yet
+import TeenChatbot from "@/components/TeenChatbot";
 import { AgeGroup } from "@/components/AgeSelector";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 // Define a QA type if it doesn't exist elsewhere
 export interface QA {
@@ -42,6 +43,7 @@ const QandA = () => {
   const [searchParams] = useSearchParams();
   const ageGroup = searchParams.get("age") as AgeGroup | null;
   const [userQuestions, setUserQuestions] = useState<string[]>([]);
+  const [activeTab, setActiveTab] = useState<string>("chatbot");
 
   // Filter questions by age group if selected
   const filteredQuestions = ageGroup
@@ -71,28 +73,41 @@ const QandA = () => {
             </p>
           </div>
           
-          <SafeQA
-            questions={filteredQuestions}
-            onAskQuestion={handleNewQuestion}
-            ageGroup={ageGroup || undefined}
-          />
-          
-          {userQuestions.length > 0 && (
-            <div className="mt-8 space-y-4">
-              <h2 className="text-xl font-bold">Your Questions</h2>
-              <p className="text-muted-foreground text-sm">
-                Your questions will be reviewed by our educators and answered soon.
-              </p>
-              {userQuestions.map((q, index) => (
-                <div key={index} className="bg-white p-4 rounded-lg shadow-sm border">
-                  <p className="font-medium">{q}</p>
-                  <p className="text-xs text-muted-foreground mt-2">
-                    Submitted - Awaiting answer
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+            <TabsList className="grid grid-cols-2 mb-6">
+              <TabsTrigger value="chatbot">Chat Assistant</TabsTrigger>
+              <TabsTrigger value="qa">Common Questions</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="chatbot" className="mt-0">
+              <TeenChatbot ageGroup={ageGroup || undefined} />
+            </TabsContent>
+            
+            <TabsContent value="qa" className="mt-0">
+              <SafeQA
+                questions={filteredQuestions}
+                onAskQuestion={handleNewQuestion}
+                ageGroup={ageGroup || undefined}
+              />
+              
+              {userQuestions.length > 0 && (
+                <div className="mt-8 space-y-4">
+                  <h2 className="text-xl font-bold">Your Questions</h2>
+                  <p className="text-muted-foreground text-sm">
+                    Your questions will be reviewed by our educators and answered soon.
                   </p>
+                  {userQuestions.map((q, index) => (
+                    <div key={index} className="bg-white p-4 rounded-lg shadow-sm border">
+                      <p className="font-medium">{q}</p>
+                      <p className="text-xs text-muted-foreground mt-2">
+                        Submitted - Awaiting answer
+                      </p>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          )}
+              )}
+            </TabsContent>
+          </Tabs>
         </div>
       </main>
     </div>

@@ -1,4 +1,3 @@
-
 import { AgeGroup } from "@/components/AgeSelector";
 import { ThemeType } from "@/components/ThemeCard";
 
@@ -836,5 +835,88 @@ export const quizData: Quiz[] = [
         explanation: "Menstruation is a natural part of female development and indicates that the reproductive system is working normally."
       }
     ]
+  }
+];
+
+export const qaData: QA[] = [
+  {
+    id: "qa1",
+    question: "What is puberty?",
+    answer: "Puberty is when your body changes from a child's body to an adult's body. It usually starts between ages 8-13 for girls and 9-14 for boys. During puberty, you'll grow taller, develop body hair, and notice other changes.",
+    ageGroups: ["10-12"],
+    themeId: "development",
+    isCommonQuestion: true
+  },
+  {
+    id: "qa2",
+    question: "What is menstruation?",
+    answer: "Menstruation (or having a period) is when blood and tissue from the uterus leave the body through the vagina. It usually happens once a month and is a normal part of growing up for girls.",
+    ageGroups: ["10-12", "13-16"],
+    themeId: "health",
+    isCommonQuestion: true
+  },
+  {
+    id: "qa3",
+    question: "How can I stay safe online?",
+    answer: "To stay safe online: never share personal information, don't meet people from the internet without a trusted adult, use privacy settings, think before you post, and tell a trusted adult if something makes you uncomfortable.",
+    ageGroups: ["6-9", "10-12", "13-16", "17-18"],
+    themeId: "values",
+    isCommonQuestion: true
+  },
+  {
+    id: "qa4",
+    question: "What is consent?",
+    answer: "Consent means getting permission before touching someone or entering their personal space. Everyone has the right to say 'yes' or 'no' about their own body. For older teens, consent is especially important in romantic or sexual situations - it must be freely given, enthusiastic, and can be withdrawn at any time.",
+    ageGroups: ["10-12", "13-16", "17-18"],
+    themeId: "relationships",
+    isCommonQuestion: true
+  },
+  {
+    id: "qa5",
+    question: "Can I get pregnant the first time I have sex?",
+    answer: "Yes, pregnancy can occur anytime unprotected sexual intercourse happens, including the first time. The only 100% effective way to prevent pregnancy is abstinence (not having sex). If someone chooses to be sexually active, contraception methods like condoms can help prevent pregnancy.",
+    ageGroups: ["13-16", "17-18"],
+    themeId: "health",
+    isCommonQuestion: true
+  },
+  {
+    id: "qa6",
+    question: "How are babies made?",
+    answer: "Babies are made when a special cell from a man (called a sperm) joins with a special cell from a woman (called an egg). This happens when grown-ups who love each other very much share a special kind of hug.",
+    ageGroups: ["3-5", "6-9"],
+    themeId: "development",
+    isCommonQuestion: true
+  },
+  {
+    id: "qa7",
+    question: "Why do I need to wash my hands?",
+    answer: "Washing your hands is important because it removes tiny germs that can make you sick. We should wash hands before eating, after using the toilet, after playing outside, and after sneezing or coughing.",
+    ageGroups: ["3-5", "6-9"],
+    themeId: "health",
+    isCommonQuestion: true
+  },
+  {
+    id: "qa8",
+    question: "What are STIs and how can I prevent them?",
+    answer: "STIs (Sexually Transmitted Infections) are infections that spread through sexual contact. The most reliable ways to prevent STIs are abstinence (not having sex) or using condoms correctly every time you have sex. Regular testing is also important if you're sexually active.",
+    ageGroups: ["13-16", "17-18"],
+    themeId: "health",
+    isCommonQuestion: true
+  },
+  {
+    id: "qa9",
+    question: "How do I know if I'm ready for a relationship?",
+    answer: "You might be ready for a relationship if you: respect yourself and others, can communicate your feelings, understand what a healthy relationship looks like, feel comfortable setting boundaries, and are interested in someone for who they are (not just to have a relationship).",
+    ageGroups: ["13-16", "17-18"],
+    themeId: "relationships",
+    isCommonQuestion: true
+  },
+  {
+    id: "qa10",
+    question: "Why are some parts of my body private?",
+    answer: "Private parts are the parts of your body covered by underwear. They're private because they're special and belong just to you. No one should look at or touch your private parts except trusted adults helping you stay clean and healthy, like parents or doctors.",
+    ageGroups: ["3-5", "6-9"],
+    themeId: "development",
+    isCommonQuestion: true
   }
 ];
