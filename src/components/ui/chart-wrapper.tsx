@@ -1,148 +1,158 @@
 
-import React from "react";
+import React, { ReactNode } from "react";
 import {
-  ResponsiveContainer,
-  LineChart,
-  Line,
-  BarChart,
+  Area,
+  AreaChart,
   Bar,
-  PieChart,
-  Pie,
-  XAxis,
-  YAxis,
+  BarChart,
   CartesianGrid,
-  Tooltip,
   Legend,
-  Cell,
+  Line,
+  LineChart,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis
 } from "recharts";
-import {
-  ChartTooltipContent,
-  ChartLegendContent,
-  ChartContainer,
+import { 
+  ChartContainer, 
+  ChartTooltipContent, 
+  ChartLegendContent 
 } from "@/components/ui/chart";
 
-interface ChartDataset {
-  label: string;
-  data: string;
-  backgroundColor?: string;
-  borderColor?: string;
-}
-
 interface ChartProps {
-  type: "line" | "bar" | "pie";
+  title?: string;
+  type: "line" | "area" | "bar" | "pie";
   data: any[];
-  indexAxis: string;
-  datasets: ChartDataset[];
-  options?: any;
-  children?: React.ReactNode;
+  width?: string;
+  height?: string;
+  xAxisKey?: string;
+  yAxisKey?: string;
+  dataKeys: string[];
+  colors?: string[];
 }
 
-interface ChartTitleProps {
-  text: string;
-  className?: string;
-}
-
-export const Chart = ({ type, data, indexAxis, datasets, options, children }: ChartProps) => {
-  // Configure chart based on type
-  const config = {
-    dataKey: indexAxis,
-    // Extract colors for configurability
-    colors: datasets.map((ds) => ({
-      backgroundColor: ds.backgroundColor || "#8b5cf6",
-      borderColor: ds.borderColor || ds.backgroundColor || "#8b5cf6",
-    })),
-  };
-
-  // Common chart container props
-  const containerProps = {
-    width: "100%",
-    height: "100%",
-    config: Object.fromEntries(
-      datasets.map((ds, i) => [
-        ds.label,
-        {
-          label: ds.label,
-          theme: {
-            light: config.colors[i].backgroundColor,
-            dark: config.colors[i].borderColor,
-          },
-        }
-      ])
-    ),
-  };
-
+export const ChartTitle = ({ children }: { children: ReactNode }) => {
   return (
-    <ChartContainer {...containerProps}>
-      {type === "line" && (
-        <ResponsiveContainer>
-          <LineChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey={config.dataKey} />
-            <YAxis />
-            <Tooltip content={<ChartTooltipContent />} />
-            <Legend content={<ChartLegendContent />} />
-            {datasets.map((dataset, index) => (
-              <Line
-                key={index}
-                type="monotone"
-                dataKey={dataset.data}
-                stroke={config.colors[index].borderColor}
-                name={dataset.label}
-              />
-            ))}
-          </LineChart>
-        </ResponsiveContainer>
-      )}
-
-      {type === "bar" && (
-        <ResponsiveContainer>
-          <BarChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey={config.dataKey} />
-            <YAxis />
-            <Tooltip content={<ChartTooltipContent />} />
-            <Legend content={<ChartLegendContent />} />
-            {datasets.map((dataset, index) => (
-              <Bar
-                key={index}
-                dataKey={dataset.data}
-                fill={config.colors[index].backgroundColor}
-                name={dataset.label}
-              />
-            ))}
-          </BarChart>
-        </ResponsiveContainer>
-      )}
-
-      {type === "pie" && (
-        <ResponsiveContainer>
-          <PieChart>
-            <Tooltip content={<ChartTooltipContent />} />
-            <Legend content={<ChartLegendContent />} />
-            <Pie
-              data={data}
-              cx="50%"
-              cy="50%"
-              labelLine={false}
-              outerRadius={80}
-              nameKey={config.dataKey}
-              dataKey={datasets[0].data}
-            >
-              {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={config.colors[0].backgroundColor} />
-              ))}
-            </Pie>
-          </PieChart>
-        </ResponsiveContainer>
-      )}
-    </ChartContainer>
+    <h3 className="text-lg font-medium mb-4">{children}</h3>
   );
 };
 
-export const ChartTitle: React.FC<ChartTitleProps> = ({ text, className }) => {
+export const Chart: React.FC<ChartProps> = ({
+  title,
+  type,
+  data,
+  width = "100%",
+  height = "300px",
+  xAxisKey = "name",
+  yAxisKey = "value",
+  dataKeys,
+  colors = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042"]
+}) => {
+  // Create a configuration object for the chart
+  const chartConfig: any = {};
+  dataKeys.forEach((key, index) => {
+    chartConfig[key] = {
+      label: key,
+      theme: {
+        light: colors[index % colors.length],
+        dark: colors[index % colors.length]
+      }
+    };
+  });
+
+  const renderChart = () => {
+    switch (type) {
+      case "line":
+        return (
+          <LineChart data={data}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey={xAxisKey} />
+            <YAxis />
+            <Tooltip content={<ChartTooltipContent />} />
+            <Legend content={<ChartLegendContent />} />
+            {dataKeys.map((key, index) => (
+              <Line 
+                key={key} 
+                type="monotone" 
+                dataKey={key} 
+                stroke={colors[index % colors.length]} 
+                activeDot={{ r: 8 }} 
+              />
+            ))}
+          </LineChart>
+        );
+      case "area":
+        return (
+          <AreaChart data={data}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey={xAxisKey} />
+            <YAxis />
+            <Tooltip content={<ChartTooltipContent />} />
+            <Legend content={<ChartLegendContent />} />
+            {dataKeys.map((key, index) => (
+              <Area 
+                key={key} 
+                type="monotone" 
+                dataKey={key} 
+                fill={colors[index % colors.length]} 
+                stroke={colors[index % colors.length]} 
+              />
+            ))}
+          </AreaChart>
+        );
+      case "bar":
+        return (
+          <BarChart data={data}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey={xAxisKey} />
+            <YAxis />
+            <Tooltip content={<ChartTooltipContent />} />
+            <Legend content={<ChartLegendContent />} />
+            {dataKeys.map((key, index) => (
+              <Bar 
+                key={key} 
+                dataKey={key} 
+                fill={colors[index % colors.length]} 
+              />
+            ))}
+          </BarChart>
+        );
+      case "pie":
+        return (
+          <PieChart>
+            <Pie 
+              data={data} 
+              dataKey={yAxisKey} 
+              nameKey={xAxisKey} 
+              cx="50%" 
+              cy="50%" 
+              outerRadius={80} 
+              fill="#8884d8"
+              label
+            >
+              {/* Pie chart doesn't need to map dataKeys the same way */}
+            </Pie>
+            <Tooltip content={<ChartTooltipContent />} />
+            <Legend content={<ChartLegendContent />} />
+          </PieChart>
+        );
+      default:
+        return null;
+    }
+  };
+
+  // Fix: Wrap the chart in a Fragment to ensure a single child element is passed
   return (
-    <div className={`text-center font-medium mt-2 mb-4 text-muted-foreground ${className || ""}`}>
-      {text}
+    <div className="chart-container">
+      {title && <ChartTitle>{title}</ChartTitle>}
+      <div style={{ width, height }}>
+        <ChartContainer config={chartConfig}>
+          {renderChart()}
+        </ChartContainer>
+      </div>
     </div>
   );
 };

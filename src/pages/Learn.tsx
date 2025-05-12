@@ -1,4 +1,5 @@
 
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import Header from "@/components/Header";
@@ -41,12 +42,38 @@ const ageAppropriateHeadings: Record<AgeGroup, Record<string, string>> = {
   },
 };
 
+// Local Storage key for saved themes
+const SAVED_THEMES_KEY = "teen_shield_learning_modules";
+
 const Learn = () => {
   const [searchParams] = useSearchParams();
   const ageGroup = searchParams.get("age") as AgeGroup;
 
-  // Filter out culture theme
-  const filteredThemeData = themeData.filter(theme => theme.id !== "culture");
+  // Use saved theme data or filter out culture theme if not saved yet
+  const getThemes = () => {
+    const savedThemes = localStorage.getItem(SAVED_THEMES_KEY);
+    
+    if (savedThemes) {
+      return JSON.parse(savedThemes);
+    } else {
+      // Initial filtering - only happens once
+      const filtered = themeData.filter(theme => theme.id !== "culture");
+      // Save to localStorage for future consistency
+      localStorage.setItem(SAVED_THEMES_KEY, JSON.stringify(filtered));
+      return filtered;
+    }
+  };
+
+  const filteredThemeData = getThemes();
+
+  // Effect to ensure themes are saved on initial render
+  useEffect(() => {
+    // If themes aren't yet in localStorage, save them
+    if (!localStorage.getItem(SAVED_THEMES_KEY)) {
+      const filtered = themeData.filter(theme => theme.id !== "culture");
+      localStorage.setItem(SAVED_THEMES_KEY, JSON.stringify(filtered));
+    }
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
