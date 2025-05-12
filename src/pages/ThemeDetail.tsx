@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
@@ -7,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import QuizCard from "@/components/QuizCard";
 import { ThemeType } from "@/components/ThemeCard";
-import { contentData, quizData, ContentItem, Quiz } from "@/data/content";
+import { contentData, quizData, ContentItem, Quiz, themeData } from "@/data/content";
 import { AgeGroup } from "@/components/AgeSelector";
 import VoiceReader from "@/components/VoiceReader";
 
@@ -54,7 +53,7 @@ const ThemeDetail = () => {
   const ageGroup = searchParams.get("age") as AgeGroup;
   
   // Get themes from localStorage to ensure consistency
-  const getThemes = () => {
+  function getThemes() {
     const savedThemes = localStorage.getItem(SAVED_THEMES_KEY);
     
     if (savedThemes) {
