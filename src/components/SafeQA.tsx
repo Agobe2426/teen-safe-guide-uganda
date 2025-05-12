@@ -16,9 +16,10 @@ interface QA {
 interface SafeQAProps {
   commonQuestions: QA[];
   ageGroup?: string;
+  onNewQuestion?: (question: string) => void;
 }
 
-const SafeQA: React.FC<SafeQAProps> = ({ commonQuestions, ageGroup }) => {
+const SafeQA: React.FC<SafeQAProps> = ({ commonQuestions, ageGroup, onNewQuestion }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [newQuestion, setNewQuestion] = useState("");
   const [submittedQuestion, setSubmittedQuestion] = useState(false);
@@ -32,6 +33,12 @@ const SafeQA: React.FC<SafeQAProps> = ({ commonQuestions, ageGroup }) => {
   const handleSubmitQuestion = () => {
     if (newQuestion.trim()) {
       console.log("Question submitted:", newQuestion, "Age group:", ageGroup);
+      
+      // Call the onNewQuestion callback if provided
+      if (onNewQuestion) {
+        onNewQuestion(newQuestion);
+      }
+      
       setSubmittedQuestion(true);
       setNewQuestion("");
       

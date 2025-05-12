@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
@@ -5,6 +6,7 @@ import Header from "@/components/Header";
 import { themeData } from "@/data/content";
 import ThemeCard from "@/components/ThemeCard";
 import { AgeGroup } from "@/components/AgeSelector";
+import { contentData } from "@/data/content";
 
 // Map of age-appropriate headings for each theme and age group
 const ageAppropriateHeadings: Record<AgeGroup, Record<string, string>> = {
@@ -76,6 +78,18 @@ const Learn = () => {
     }
   }, []);
 
+  // Filter themes based on age group
+  const ageFilteredThemes = themes.filter(theme => {
+    // If no age group is selected, show all themes
+    if (!ageGroup) return true;
+    
+    // Check if this theme has content for the selected age group
+    return contentData.some(content => 
+      content.themeId === theme.id && 
+      content.ageGroups.includes(ageGroup)
+    );
+  });
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Header />
@@ -95,20 +109,26 @@ const Learn = () => {
             </p>
           </div>
           
-          <div className="space-y-4">
-            {themes.map((theme) => (
-              <ThemeCard 
-                key={theme.id} 
-                theme={{
-                  ...theme,
-                  title: ageGroup && ageAppropriateHeadings[ageGroup]?.[theme.id] 
-                    ? ageAppropriateHeadings[ageGroup][theme.id] 
-                    : theme.title
-                }} 
-                ageGroup={ageGroup || ""}
-              />
-            ))}
-          </div>
+          {ageFilteredThemes.length > 0 ? (
+            <div className="space-y-4">
+              {ageFilteredThemes.map((theme) => (
+                <ThemeCard 
+                  key={theme.id} 
+                  theme={{
+                    ...theme,
+                    title: ageGroup && ageAppropriateHeadings[ageGroup]?.[theme.id] 
+                      ? ageAppropriateHeadings[ageGroup][theme.id] 
+                      : theme.title
+                  }} 
+                  ageGroup={ageGroup || ""}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-8">
+              <p className="text-muted-foreground">No content available for the selected age group.</p>
+            </div>
+          )}
         </div>
       </main>
     </div>
@@ -116,3 +136,4 @@ const Learn = () => {
 };
 
 export default Learn;
+

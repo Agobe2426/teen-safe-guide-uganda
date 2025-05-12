@@ -72,6 +72,7 @@ const QandA = () => {
           <SafeQA
             commonQuestions={filteredQuestions}
             ageGroup={ageGroup || undefined}
+            onNewQuestion={handleNewQuestion}
           />
           
           {userQuestions.length > 0 && (
