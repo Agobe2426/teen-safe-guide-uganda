@@ -15,7 +15,7 @@ interface QA {
 
 interface SafeQAProps {
   commonQuestions: QA[];
-  ageGroup: string;
+  ageGroup?: string;
 }
 
 const SafeQA: React.FC<SafeQAProps> = ({ commonQuestions, ageGroup }) => {

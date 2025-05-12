@@ -5,16 +5,8 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import SafeQA from "@/components/SafeQA";
-// Remove the qaData import as it doesn't exist yet
 import { AgeGroup } from "@/components/AgeSelector";
-
-// Define a QA type if it doesn't exist elsewhere
-export interface QA {
-  id: string;
-  question: string;
-  answer: string;
-  ageGroups: AgeGroup[];
-}
+import { QA } from "@/data/content";
 
 // Sample QA data until we have real data
 const sampleQaData: QA[] = [
@@ -22,19 +14,25 @@ const sampleQaData: QA[] = [
     id: "q1",
     question: "What are the changes that happen during puberty?",
     answer: "During puberty, bodies change in many ways. Boys may experience voice changes, growth in height, and body hair development. Girls may experience breast development, menstruation, and changes in body shape. Both may experience increased emotions, attraction to others, and skin changes like acne.",
-    ageGroups: ["10-12", "13-16", "17-18"]
+    ageGroups: ["10-12", "13-16", "17-18"],
+    themeId: "development",
+    isCommonQuestion: true
   },
   {
     id: "q2",
     question: "How do I know my body is developing normally?",
     answer: "Everyone develops at their own pace. Some people start puberty earlier, and some later. If you have concerns about your development, it's always good to talk to a parent, trusted adult, or healthcare provider.",
-    ageGroups: ["10-12", "13-16", "17-18"]
+    ageGroups: ["10-12", "13-16", "17-18"],
+    themeId: "development",
+    isCommonQuestion: true
   },
   {
     id: "q3",
     question: "Why do I need to wash my hands?",
     answer: "Washing hands helps remove germs that can make you sick. It's important to wash hands before eating, after using the toilet, and after touching animals.",
-    ageGroups: ["3-5", "6-9"]
+    ageGroups: ["3-5", "6-9"],
+    themeId: "health",
+    isCommonQuestion: true
   }
 ];
 
@@ -72,8 +70,7 @@ const QandA = () => {
           </div>
           
           <SafeQA
-            questions={filteredQuestions}
-            onAskQuestion={handleNewQuestion}
+            commonQuestions={filteredQuestions}
             ageGroup={ageGroup || undefined}
           />
           
