@@ -5,7 +5,6 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import SafeQA from "@/components/SafeQA";
-// Remove the qaData import as it doesn't exist yet
 import { AgeGroup } from "@/components/AgeSelector";
 
 // Define a QA type if it doesn't exist elsewhere

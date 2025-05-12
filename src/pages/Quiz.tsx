@@ -10,12 +10,14 @@ import { Progress } from "@/components/ui/progress";
 import Header from "@/components/Header";
 import { quizData, Question } from "@/data/content";
 import { ThemeType } from "@/components/ThemeCard";
+import { trackQuizCompletion, getPersonalizedRecommendations } from "@/utils/aiHelper";
+import { AgeGroup } from "@/components/AgeSelector";
 
 const Quiz = () => {
   const { quizId } = useParams<{ quizId: string }>();
   const [searchParams] = useSearchParams();
   const themeId = searchParams.get("theme") as ThemeType;
-  const ageGroup = searchParams.get("age");
+  const ageGroup = searchParams.get("age") as AgeGroup;
   
   const [quiz, setQuiz] = useState(quizData.find(q => q.id === quizId));
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -23,9 +25,18 @@ const Quiz = () => {
   const [showFeedback, setShowFeedback] = useState(false);
   const [score, setScore] = useState(0);
   const [quizCompleted, setQuizCompleted] = useState(false);
+  const [recommendations, setRecommendations] = useState<string[]>([]);
   
   const currentQuestion: Question | undefined = quiz?.questions[currentQuestionIndex];
   const progress = quiz ? ((currentQuestionIndex + 1) / quiz.questions.length) * 100 : 0;
+  
+  // Get personalized recommendations when quiz is completed
+  useEffect(() => {
+    if (quizCompleted && ageGroup) {
+      const recs = getPersonalizedRecommendations(ageGroup, themeId);
+      setRecommendations(recs);
+    }
+  }, [quizCompleted, ageGroup, themeId]);
   
   const handleAnswerSelect = (answerIndex: number) => {
     if (!showFeedback) {
@@ -51,6 +62,12 @@ const Quiz = () => {
       setShowFeedback(false);
     } else {
       setQuizCompleted(true);
+      
+      // Track quiz completion for personalized learning
+      if (quizId) {
+        const finalScore = (score + (selectedAnswer === currentQuestion?.correctAnswer ? 1 : 0)) / quiz.questions.length;
+        trackQuizCompletion(quizId, finalScore);
+      }
     }
   };
   
@@ -165,7 +182,7 @@ const Quiz = () => {
               </Card>
             </div>
           ) : (
-            <Card className="teen-shield-card text-center">
+            <Card className="teen-shield-card">
               <div className="space-y-4">
                 <div className="w-16 h-16 bg-shield-purple-light rounded-full mx-auto flex items-center justify-center">
                   {score / quiz.questions.length >= 0.7 ? (
@@ -175,9 +192,9 @@ const Quiz = () => {
                   )}
                 </div>
                 
-                <h2 className="text-xl font-bold">Quiz Completed!</h2>
+                <h2 className="text-xl font-bold text-center">Quiz Completed!</h2>
                 
-                <div>
+                <div className="text-center">
                   <p className="text-lg font-medium">Your Score:</p>
                   <p className="text-3xl font-bold text-shield-purple">
                     {score} / {quiz.questions.length}
@@ -188,6 +205,31 @@ const Quiz = () => {
                       : 'Keep learning! You\'ll do better next time.'}
                   </p>
                 </div>
+                
+                {/* Recommendations Section */}
+                {recommendations.length > 0 && (
+                  <div className="mt-4 pt-4 border-t border-gray-200">
+                    <h3 className="font-semibold mb-3">You might also like:</h3>
+                    <div className="space-y-2">
+                      {recommendations.map((rec, index) => {
+                        const isTheme = rec.startsWith("theme-");
+                        const id = rec.split("-").slice(1).join("-");
+                        return (
+                          <Link 
+                            key={index}
+                            to={isTheme ? `/theme/${id}?age=${ageGroup}` : `/quiz/${id}?theme=${themeId}&age=${ageGroup}`}
+                            className="block p-3 bg-shield-purple-light/50 rounded-md hover:bg-shield-purple-light transition-colors"
+                          >
+                            <div className="flex justify-between items-center">
+                              <span>{isTheme ? `Explore: ${id}` : `Try Quiz: ${id}`}</span>
+                              <ArrowLeft className="h-4 w-4 rotate-180" />
+                            </div>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
                 
                 <div className="pt-4 flex flex-col gap-3">
                   <Link to={`/theme/${themeId}?age=${ageGroup}`}>

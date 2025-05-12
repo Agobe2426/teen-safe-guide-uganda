@@ -5,8 +5,10 @@ import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Lock, Settings, FileText, AlertCircle, CheckCircle } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Lock, Settings, FileText, AlertCircle, CheckCircle, BarChart } from "lucide-react";
 import { cn } from "@/lib/utils";
+import ParentDashboard from "./ParentDashboard";
 
 const ParentControls = () => {
   const [passwordInput, setPasswordInput] = useState("");
@@ -19,6 +21,7 @@ const ParentControls = () => {
   });
   const [timeLimitHours, setTimeLimitHours] = useState("1");
   const [saved, setSaved] = useState(false);
+  const [activeTab, setActiveTab] = useState("settings");
 
   const handleAuthenticate = (e: React.FormEvent) => {
     e.preventDefault();
@@ -83,123 +86,137 @@ const ParentControls = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center gap-2">
-        <Settings className="h-5 w-5 text-shield-purple" />
-        <h2 className="text-xl font-bold">Parent Controls</h2>
-      </div>
-
-      <div className="space-y-4">
-        <Card className="teen-shield-card">
-          <h3 className="font-bold text-lg">Content Settings</h3>
-          <p className="text-sm text-muted-foreground mb-4">
-            Configure what content your child can access based on their age group.
-          </p>
-          
+      <Tabs value={activeTab} onValueChange={setActiveTab}>
+        <TabsList className="grid grid-cols-2">
+          <TabsTrigger value="settings" className="flex items-center gap-1">
+            <Settings className="h-4 w-4" />
+            Settings
+          </TabsTrigger>
+          <TabsTrigger value="dashboard" className="flex items-center gap-1">
+            <BarChart className="h-4 w-4" />
+            Dashboard
+          </TabsTrigger>
+        </TabsList>
+        
+        <TabsContent value="settings">
           <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <Label htmlFor="restrictedContent" className="font-medium">Age-Appropriate Content Only</Label>
-                <p className="text-xs text-muted-foreground">
-                  Restrict content based on the selected age group
-                </p>
+            <Card className="teen-shield-card">
+              <h3 className="font-bold text-lg">Content Settings</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                Configure what content your child can access based on their age group.
+              </p>
+              
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <Label htmlFor="restrictedContent" className="font-medium">Age-Appropriate Content Only</Label>
+                    <p className="text-xs text-muted-foreground">
+                      Restrict content based on the selected age group
+                    </p>
+                  </div>
+                  <Switch
+                    id="restrictedContent"
+                    checked={settings.restrictedContent}
+                    onCheckedChange={(checked) => updateSetting("restrictedContent", checked)}
+                  />
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <div>
+                    <Label htmlFor="qaModeration" className="font-medium">Q&A Moderation</Label>
+                    <p className="text-xs text-muted-foreground">
+                      Review questions before they are submitted
+                    </p>
+                  </div>
+                  <Switch
+                    id="qaModeration"
+                    checked={settings.qaModeration}
+                    onCheckedChange={(checked) => updateSetting("qaModeration", checked)}
+                  />
+                </div>
               </div>
-              <Switch
-                id="restrictedContent"
-                checked={settings.restrictedContent}
-                onCheckedChange={(checked) => updateSetting("restrictedContent", checked)}
-              />
+            </Card>
+            
+            <Card className="teen-shield-card">
+              <h3 className="font-bold text-lg">App Settings</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                Configure how the app works and how much time your child can spend on it.
+              </p>
+              
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <Label htmlFor="offlineAccess" className="font-medium">Allow Offline Access</Label>
+                    <p className="text-xs text-muted-foreground">
+                      Access content without internet connection
+                    </p>
+                  </div>
+                  <Switch
+                    id="offlineAccess"
+                    checked={settings.offlineAccess}
+                    onCheckedChange={(checked) => updateSetting("offlineAccess", checked)}
+                  />
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <div>
+                    <Label htmlFor="timeLimit" className="font-medium">Daily Time Limit</Label>
+                    <p className="text-xs text-muted-foreground">
+                      Set a daily limit for app usage
+                    </p>
+                  </div>
+                  <Switch
+                    id="timeLimit"
+                    checked={settings.timeLimit}
+                    onCheckedChange={(checked) => updateSetting("timeLimit", checked)}
+                  />
+                </div>
+                
+                <div className={cn(
+                  "flex items-center gap-2 transition-opacity",
+                  settings.timeLimit ? "opacity-100" : "opacity-50"
+                )}>
+                  <Label htmlFor="timeLimitValue" className="text-sm whitespace-nowrap">
+                    Limit (hours):
+                  </Label>
+                  <Input
+                    id="timeLimitValue"
+                    type="number"
+                    className="w-20"
+                    value={timeLimitHours}
+                    onChange={(e) => setTimeLimitHours(e.target.value)}
+                    disabled={!settings.timeLimit}
+                    min="0.5"
+                    max="8"
+                    step="0.5"
+                  />
+                </div>
+              </div>
+            </Card>
+            
+            <div className="flex justify-center">
+              <Button
+                onClick={handleSaveSettings}
+                className="teen-shield-btn flex gap-2"
+              >
+                {saved ? <CheckCircle className="h-4 w-4" /> : <FileText className="h-4 w-4" />}
+                {saved ? "Settings Saved" : "Save Settings"}
+              </Button>
             </div>
             
-            <div className="flex items-center justify-between">
-              <div>
-                <Label htmlFor="qaModeration" className="font-medium">Q&A Moderation</Label>
-                <p className="text-xs text-muted-foreground">
-                  Review questions before they are submitted
-                </p>
-              </div>
-              <Switch
-                id="qaModeration"
-                checked={settings.qaModeration}
-                onCheckedChange={(checked) => updateSetting("qaModeration", checked)}
-              />
+            <div className="text-center p-4 bg-muted rounded-lg flex items-center justify-center gap-2 text-sm">
+              <AlertCircle className="h-4 w-4 text-muted-foreground" />
+              <p className="text-muted-foreground">
+                These settings will be applied to this device only.
+              </p>
             </div>
           </div>
-        </Card>
+        </TabsContent>
         
-        <Card className="teen-shield-card">
-          <h3 className="font-bold text-lg">App Settings</h3>
-          <p className="text-sm text-muted-foreground mb-4">
-            Configure how the app works and how much time your child can spend on it.
-          </p>
-          
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <Label htmlFor="offlineAccess" className="font-medium">Allow Offline Access</Label>
-                <p className="text-xs text-muted-foreground">
-                  Access content without internet connection
-                </p>
-              </div>
-              <Switch
-                id="offlineAccess"
-                checked={settings.offlineAccess}
-                onCheckedChange={(checked) => updateSetting("offlineAccess", checked)}
-              />
-            </div>
-            
-            <div className="flex items-center justify-between">
-              <div>
-                <Label htmlFor="timeLimit" className="font-medium">Daily Time Limit</Label>
-                <p className="text-xs text-muted-foreground">
-                  Set a daily limit for app usage
-                </p>
-              </div>
-              <Switch
-                id="timeLimit"
-                checked={settings.timeLimit}
-                onCheckedChange={(checked) => updateSetting("timeLimit", checked)}
-              />
-            </div>
-            
-            <div className={cn(
-              "flex items-center gap-2 transition-opacity",
-              settings.timeLimit ? "opacity-100" : "opacity-50"
-            )}>
-              <Label htmlFor="timeLimitValue" className="text-sm whitespace-nowrap">
-                Limit (hours):
-              </Label>
-              <Input
-                id="timeLimitValue"
-                type="number"
-                className="w-20"
-                value={timeLimitHours}
-                onChange={(e) => setTimeLimitHours(e.target.value)}
-                disabled={!settings.timeLimit}
-                min="0.5"
-                max="8"
-                step="0.5"
-              />
-            </div>
-          </div>
-        </Card>
-        
-        <div className="flex justify-center">
-          <Button
-            onClick={handleSaveSettings}
-            className="teen-shield-btn flex gap-2"
-          >
-            {saved ? <CheckCircle className="h-4 w-4" /> : <FileText className="h-4 w-4" />}
-            {saved ? "Settings Saved" : "Save Settings"}
-          </Button>
-        </div>
-        
-        <div className="text-center p-4 bg-muted rounded-lg flex items-center justify-center gap-2 text-sm">
-          <AlertCircle className="h-4 w-4 text-muted-foreground" />
-          <p className="text-muted-foreground">
-            These settings will be applied to this device only.
-          </p>
-        </div>
-      </div>
+        <TabsContent value="dashboard">
+          <ParentDashboard />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };
