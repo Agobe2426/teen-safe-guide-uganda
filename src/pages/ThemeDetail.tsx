@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
@@ -127,7 +128,10 @@ const ThemeDetail = () => {
       <main className="flex-grow">
         <div className="teen-shield-container">
           <div className="mb-4">
-            <Link to="/learn" className="inline-flex items-center text-muted-foreground hover:text-foreground mb-4">
+            <Link 
+              to={`/learn${ageGroup ? `?age=${ageGroup}` : ''}`} 
+              className="inline-flex items-center text-muted-foreground hover:text-foreground mb-4"
+            >
               <ArrowLeft className="h-4 w-4 mr-1" />
               Back to Learning Areas
             </Link>

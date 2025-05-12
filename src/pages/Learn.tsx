@@ -1,11 +1,9 @@
-
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import Header from "@/components/Header";
 import { themeData } from "@/data/content";
 import ThemeCard from "@/components/ThemeCard";
-import { useSearchParams } from "react-router-dom";
 import { AgeGroup } from "@/components/AgeSelector";
 
 // Map of age-appropriate headings for each theme and age group
@@ -48,9 +46,10 @@ const SAVED_THEMES_KEY = "teen_shield_learning_modules";
 const Learn = () => {
   const [searchParams] = useSearchParams();
   const ageGroup = searchParams.get("age") as AgeGroup;
+  const [themes, setThemes] = useState(getThemes());
 
   // Use saved theme data or filter out culture theme if not saved yet
-  const getThemes = () => {
+  function getThemes() {
     const savedThemes = localStorage.getItem(SAVED_THEMES_KEY);
     
     if (savedThemes) {
@@ -62,16 +61,18 @@ const Learn = () => {
       localStorage.setItem(SAVED_THEMES_KEY, JSON.stringify(filtered));
       return filtered;
     }
-  };
+  }
 
-  const filteredThemeData = getThemes();
-
-  // Effect to ensure themes are saved on initial render
+  // Effect to ensure themes are saved on initial render and maintained across navigation
   useEffect(() => {
     // If themes aren't yet in localStorage, save them
     if (!localStorage.getItem(SAVED_THEMES_KEY)) {
       const filtered = themeData.filter(theme => theme.id !== "culture");
       localStorage.setItem(SAVED_THEMES_KEY, JSON.stringify(filtered));
+      setThemes(filtered);
+    } else {
+      // Otherwise use the saved themes to maintain consistency
+      setThemes(JSON.parse(localStorage.getItem(SAVED_THEMES_KEY)!));
     }
   }, []);
 
@@ -95,7 +96,7 @@ const Learn = () => {
           </div>
           
           <div className="space-y-4">
-            {filteredThemeData.map((theme) => (
+            {themes.map((theme) => (
               <ThemeCard 
                 key={theme.id} 
                 theme={{
